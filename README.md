@@ -1,2 +1,2 @@
-# time-to-work
+# Time to Work!
 A Firefox extension that counts how much time you spent working.

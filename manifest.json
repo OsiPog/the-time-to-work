@@ -1,6 +1,6 @@
 {
     "manifest_version": 2,
-    "name": "Time to Work",
+    "name": "Time to Work!",
     "version": "0.0.1",
 
 	"browser_action": {
@@ -8,7 +8,7 @@
 		"default_icon":{
 			"64": "icon/icon64.png"
 		},
-		"default_title": "Time to Work",
+		"default_title": "Time to Work!",
 		"default_popup": "/popup.html"
 	},
 
@@ -16,5 +16,5 @@
         "storage"
     ]
 
-    
+
 }
