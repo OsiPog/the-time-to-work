@@ -1,0 +1,28 @@
+:root {
+    font-size: 16px;
+}
+
+body {
+    margin: 0.5rem;
+}
+
+button {
+    margin-top: 0.2rem;
+    cursor: pointer;
+    border: none;
+    border-radius: 0.5rem;
+}
+
+.off {background-color: #05AA5D;}
+.off:hover {background-color: #009952;}
+.on {background-color: #c00d00;}
+.on:hover {background-color: #990a00;}
+
+
+.button_text {
+    color: white;
+    text-align: center;
+    font-size: 2rem;
+    
+    margin: 0.9rem;
+}
