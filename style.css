@@ -7,10 +7,21 @@ body {
 }
 
 button {
-    margin-top: 0.2rem;
+    margin-top: 0.4rem;
     cursor: pointer;
     border: none;
     border-radius: 0.5rem;
+}
+
+h1 {
+    text-align: center;
+    margin: 0.4rem;
+    font-weight: normal;
+}
+
+h2 {
+    margin: 0.2rem;
+    font-weight: normal;
 }
 
 .off {background-color: #05AA5D;}
@@ -25,4 +36,17 @@ button {
     font-size: 2rem;
     
     margin: 0.9rem;
+}
+
+.work_type_input {
+    margin-top: 1rem;
+}
+
+.history {
+    border-radius: 0.1rem;
+    border-width: 0.15rem;
+    border-style: solid;
+    border-color: #a1a1a1;
+
+    background-color: #ebebeb;
 }

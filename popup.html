@@ -7,12 +7,15 @@
     <body>
         <h1>Time to Work!</h1>
 
-        <div id="history">
-        </div>
-        
-        <input type="text", id="type_of_work">
+        <h2>History</h2>
+        <table id="history" class="history">
+            <th style="width:75%;text-align:center">Type</th>
+            <th style="width:25%;text-align:left;">Duration</th>
+        </table>
 
-        <button type="button" id="timer" class="off">
+        <input type="text" id="type_of_work" class="work_type_input" placeholder="Enter a type of work">
+
+        <button type="button" id="timer" class="off" onclick="pushedButton()">
             <p class="button_text">Start Working<p>
         </button>
     </body>
