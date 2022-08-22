@@ -1,4 +1,3 @@
-
 // Starting the timer
 function startTimer() {
     // Changing the class
