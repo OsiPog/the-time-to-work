@@ -6,7 +6,7 @@ function saveConfig() {
 function getConfig() {
     let encrypted = localStorage.getItem("time-to-work");
     if (!encrypted) {
-        return {"started_at":-1, "history":[]};
+        return {"started_at":-1};
     }
 
     let decrypted = vigenere(encrypted, "time-to-work", true);

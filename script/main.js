@@ -4,7 +4,15 @@ function startTimer() {
     button_timer.className = "on";
 
     // Starting the visual timer (Text inside button will be the elapsed time).
-    if (config.started_at === -1) config.started_at = Math.round(Date.now()/1000);
+    if (config.started_at === -1) {
+        config.started_at = Math.round(Date.now()/1000);
+        
+        // Adding the work to the history
+        let work_type = input_work_type.innerText
+        if (work_type === "") work_type = "not defined";
+
+        config[config.started_at] = [work_type];
+    }
     visualTimer();
 }
 
@@ -15,11 +23,8 @@ function stopTimer() {
     // Resetting the timer button
     button_text.innerText = "Start Working";
 
-    // Adding the work to the history
-    let work_type = input_work_type.innerText
-    if (work_type === "") work_type = "not defined";
-    config.history.push([work_type, config.started_at, 
-                            Math.round(Date.now()/1000)]);
+    // Adding the end-timestamp to the entry in history
+    config[config.started_at].push(Math.round(Date.now()/1000));
 
     // resetting the visual timer
     config.started_at = -1;

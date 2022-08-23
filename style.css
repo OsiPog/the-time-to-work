@@ -4,6 +4,7 @@
 
 body {
     margin: 0.5rem;
+    max-width: 20rem;
 }
 
 button {
@@ -12,6 +13,9 @@ button {
     border: none;
     border-radius: 0.5rem;
     min-width: 15rem;
+    max-width: 15rem;
+
+    align-self: center;
 }
 
 h1 {
@@ -23,12 +27,6 @@ h1 {
 h2 {
     margin: 0.2rem;
     font-weight: normal;
-}
-
-th,td {
-    border: 0.1rem;
-    border-bottom-style: solid;
-    border-bottom-color: #000000;
 }
 
 .off {background-color: #05AA5D;}
@@ -47,8 +45,24 @@ th,td {
 
 .work_type_input {
     margin-top: 1rem;
+    min-width: 15rem;
+    max-width: 15rem;
+
+    align-self: center;
 }
 
-.history {
-    background-color: #ebebeb;
+.history_entry {
+    background-color: #8fc9ff;
+    border: 0.4rem;
+    border-left-style: solid;
+    border-left-color: #0586ff;
+
+}
+
+.type_of_work_text {
+    font-size: 1.1rem;
+}
+
+.type_of_work_duration {
+    font-size: 1.5rem;
 }
