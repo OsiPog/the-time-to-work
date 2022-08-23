@@ -61,8 +61,18 @@ h2 {
 
 .type_of_work_text {
     font-size: 1.1rem;
+    width:65%;
 }
 
 .type_of_work_duration {
     font-size: 1.5rem;
+    width: 25%;
+}
+
+.history_entry_control {
+    width: 10%;
+}
+
+.history_entry_control_button {
+    height: 2rem;
 }
