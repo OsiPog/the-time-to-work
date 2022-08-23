@@ -29,10 +29,16 @@ h2 {
     font-weight: normal;
 }
 
+td {
+    border-right-width: 0.2rem;
+    border-right-color: #5eb1ff;
+    border-right-style: dashed;
+}
+
 .off {background-color: #05AA5D;}
 .off:hover {background-color: #009952;}
-.on {background-color: #c00d00;}
-.on:hover {background-color: #990a00;}
+.on {background-color: #00bb92;}
+.on:hover {background-color: #00a581;}
 
 
 .button_text {
@@ -51,28 +57,37 @@ h2 {
     align-self: center;
 }
 
-.history_entry {
-    background-color: #8fc9ff;
-    border: 0.4rem;
-    border-left-style: solid;
-    border-left-color: #0586ff;
-
-}
-
 .type_of_work_text {
-    font-size: 1.1rem;
+    font-size: 0.9rem;
     width:65%;
 }
 
 .type_of_work_duration {
     font-size: 1.5rem;
-    width: 25%;
+    width: 15%;
 }
 
 .history_entry_control {
     width: 10%;
 }
 
+.history_entry {
+    background-color: #8fc9ff;
+    border: 0.4rem;
+    border-top-right-radius: 0.3rem;
+    border-bottom-right-radius: 0.3rem;
+    border-left-style: solid;
+    border-left-color: #0586ff;
+
+    margin-top: 0.2rem;
+
+}
+
 .history_entry_control_button {
-    height: 2rem;
+    height: 1.5rem;
+    opacity: 75%;
+    cursor: pointer;
+}
+.history_entry_control_button:hover {
+    opacity: 100%;
 }

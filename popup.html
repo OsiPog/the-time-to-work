@@ -9,7 +9,7 @@
 
         <h2>History</h2>
         <div id="history_container">
-            <table id="sample_history_entry" class="history_entry">
+            <table hidden id="sample_history_entry" class="history_entry">
                 <tr>
                     <td class="type_of_work_text">
                         A well thought out work type that describes the work
@@ -19,6 +19,7 @@
                     </td>
                     <td class="history_entry_control">
                         <img src="img/trash.png" title="Delete entry" class="history_entry_control_button">
+                        <img src="img/copy.png" title="Reuse type of work" class="history_entry_control_button">
                     </td>
                 </tr>
             </table>
@@ -29,8 +30,9 @@
         <button type="button" id="timer" class="off">
             <p class="button_text">Start Working<p>
         </button>
-
+        
         <script src="script/utils.js"></script>
+        <script src="script/history.js"></script>
         <script src="script/config_loader.js"></script>
         <script src="script/main.js"></script>
     </body>

@@ -11,7 +11,7 @@ function startTimer() {
         let work_type = input_work_type.innerText
         if (work_type === "") work_type = "not defined";
 
-        config[config.started_at] = [work_type];
+        config.history.unshift([work_type, config.started_at, -1]);
     }
     visualTimer();
 }
@@ -24,7 +24,7 @@ function stopTimer() {
     button_text.innerText = "Start Working";
 
     // Adding the end-timestamp to the entry in history
-    config[config.started_at].push(Math.round(Date.now()/1000));
+    config.history[0][2] = Math.round(Date.now()/1000);
 
     // resetting the visual timer
     config.started_at = -1;
@@ -40,15 +40,7 @@ function visualTimer() {
 
     let elapsed = Math.round(Date.now()/1000 - config.started_at);
 
-    let h = Math.floor(elapsed/3600);
-    let min = Math.floor((elapsed-h*3600)/60);
-    let s = elapsed-h*3600-min*60;
-
-    if (h < 10) h = "0" + h;
-    if (min < 10) min = "0" + min;
-    if (s < 10) s = "0" + s;
-
-    button_text.innerText = h + ":" + min + ":" + s;
+    button_text.innerText = convertSecondsToTime(elapsed);
 
     saveConfig();
 
@@ -77,6 +69,7 @@ let config = getConfig();
 let button_timer = document.querySelector("button#timer");
 let button_text = button_timer.querySelector("p");
 let input_work_type = document.querySelector("input#type_of_work");
+let div_history_container = document.querySelector("div#history_container");
 
 // Connecting the click function to the click event
 button_timer.addEventListener("click", clickedButton);

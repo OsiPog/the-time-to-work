@@ -1,14 +1,4 @@
-LETTERS = " s*G->9}XpL+Tg3te{:0lSM%kEN&#!Y\\FZmf:$jx<7VI58A[a]U?nzcduWr§KBPiO_JohHQC2DbvyR1w46q"
-
-// Cleaning a string of every character which isn't present in LETTERS.
-function cleanString(string) {
-	let cleaned = "";
-	for (let c of string.split("\n").join("").split(" ").join("")) {
-		if (LETTERS.includes(c)) cleaned += c;
-	}
-	
-	return cleaned;
-}
+LETTERS = " s*G->9}XpL+[T]g3te{:0lSM%kEN&#!YFZmf:$jx<7VI58AaU?nzcduWr§KBPiO_JohHQC2DbvyR1w46q"
 
 // An implementation of the Vigenere encryption with an addition of safety.
 // (The used alphabet is randomized)
@@ -37,4 +27,18 @@ function vigenere(string, key_string, decrypt = false) {
 	}
 	
 	return new_string;
+}
+
+
+// Returns an amount of seconds into the time format hh:mm:ss
+function convertSecondsToTime(seconds) {
+	let h = Math.floor(seconds/3600);
+    let min = Math.floor((seconds-h*3600)/60);
+    let s = seconds-h*3600-min*60;
+
+    if (h < 10) h = "0" + h;
+    if (min < 10) min = "0" + min;
+    if (s < 10) s = "0" + s;
+
+    return h + ":" + min + ":" + s;
 }
