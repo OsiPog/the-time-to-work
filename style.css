@@ -25,6 +25,12 @@ h2 {
     font-weight: normal;
 }
 
+th,td {
+    border: 0.1rem;
+    border-bottom-style: solid;
+    border-bottom-color: #000000;
+}
+
 .off {background-color: #05AA5D;}
 .off:hover {background-color: #009952;}
 .on {background-color: #c00d00;}
@@ -44,10 +50,5 @@ h2 {
 }
 
 .history {
-    border-radius: 0.1rem;
-    border-width: 0.15rem;
-    border-style: solid;
-    border-color: #a1a1a1;
-
     background-color: #ebebeb;
 }

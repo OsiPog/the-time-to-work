@@ -21,10 +21,11 @@ function stopTimer() {
     config.history.push([work_type, config.started_at, 
                             Math.round(Date.now()/1000)]);
 
-    saveConfig();
-
     // resetting the visual timer
     config.started_at = -1;
+    
+    // saving the changed config
+    saveConfig();
 }
 
 function visualTimer() {
