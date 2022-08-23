@@ -22,6 +22,8 @@ function updateHistory() {
 
     for(let i=0;i<until_index;i++) {
         let config_entry = config.history[i];
+        
+        if (config_entry[i][2] === -1) continue;
 
         // Getting the HTML elements
         let new_entry = sample_entry.cloneNode(true);
