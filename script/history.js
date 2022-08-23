@@ -27,7 +27,7 @@ function updateHistory() {
         let new_entry = sample_entry.cloneNode(true);
         let text = new_entry.querySelector("tr>td.type_of_work_text");
         let duration = new_entry.querySelector("tr>td.type_of_work_duration");
-        let buttons = new_entry.querySelectorAll("tr>td.history_entry_control");
+        let buttons = new_entry.querySelectorAll("tr>td.history_entry_control>img");
         
         // Changing the default values
         new_entry.removeAttribute("hidden");
@@ -45,7 +45,19 @@ function updateHistory() {
             saveConfig();
         })
 
-        // Copy icon
+        // Copy up icon
+        buttons[1].addEventListener("click", function() {
+            // Changing the input fields value to this entrys value
+            config.history[i][0] = input_work_type.value;
+            text.innerText = input_work_type.value;
+            saveConfig();
+        })
+
+        // Copy down icon
+        buttons[2].addEventListener("click", function() {
+            // Changing the input fields value to this entrys value
+            input_work_type.value = config.history[i][0];
+        })
 
         all_entries[0].before(new_entry);
     }
