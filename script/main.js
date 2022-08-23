@@ -8,7 +8,7 @@ function startTimer() {
         config.started_at = Math.round(Date.now()/1000);
         
         // Adding the work to the history
-        let work_type = input_work_type.innerText
+        let work_type = input_work_type.value;
         if (work_type === "") work_type = "not defined";
 
         config.history.unshift([work_type, config.started_at, -1]);
@@ -31,6 +31,9 @@ function stopTimer() {
     
     // saving the changed config
     saveConfig();
+
+    // Updating the visual history
+    updateHistory();
 }
 
 function visualTimer() {
@@ -74,6 +77,10 @@ let div_history_container = document.querySelector("div#history_container");
 // Connecting the click function to the click event
 button_timer.addEventListener("click", clickedButton);
 
+// Starting the timer if the popup was closed with the timer on.
 if (config.started_at !== -1) {
     startTimer();
 }
+
+// Creating the visual history.
+updateHistory();

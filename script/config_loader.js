@@ -1,8 +1,6 @@
 function saveConfig() {
     let encrypted = vigenere(JSON.stringify(config), "time-to-work")
     localStorage.setItem("time-to-work", encrypted);
-
-    console.log(JSON.stringify(config));
 }
 
 function getConfig() {
