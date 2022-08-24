@@ -29,11 +29,7 @@ h2 {
     font-weight: normal;
 }
 
-td {
-    border-right-width: 0.2rem;
-    border-right-color: #5eb1ff;
-    border-right-style: dashed;
-}
+
 
 .off {background-color: #05AA5D;}
 .off:hover {background-color: #009952;}
@@ -49,26 +45,22 @@ td {
     margin: 0.9rem;
 }
 
+#history_container {
+    max-height: 10rem;
+    min-width: 18rem;
+    max-width: 18rem;
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    align-items: center;
+}
+
 .work_type_input {
     margin-top: 1rem;
     min-width: 15rem;
     max-width: 15rem;
 
     align-self: center;
-}
-
-.type_of_work_text {
-    font-size: 0.9rem;
-    width:65%;
-}
-
-.type_of_work_duration {
-    font-size: 1.5rem;
-    width: 15%;
-}
-
-.history_entry_control {
-    width: 10%;
 }
 
 .history_entry {
@@ -81,10 +73,31 @@ td {
 
     margin-top: 0.2rem;
 
+    max-width: inherit;
+    min-width: inherit;
+}
+
+.type_of_work_text {
+    font-size: 1.2rem;
+    padding-right: 0.25rem;
+
+    width: 35%;
+
+    overflow-wrap: normal;
+}
+
+.type_of_work_duration {
+    font-size: 1.5rem;
+}
+
+.history_entry_control {
+    display: inline-block;
+    height: inherit;
+    vertical-align: middle;
 }
 
 .history_entry_control_button {
-    height: 1.5rem;
+    height: 1.6rem;
     opacity: 75%;
     cursor: pointer;
 }

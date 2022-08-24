@@ -57,6 +57,13 @@ function visualTimer() {
 // This is called when the button got clicked.
 function clickedButton() {
     if (button_timer.className === "off") {
+        // Testing for clear history command.
+        if (input_work_type.value === "HARD_RESET") {
+            delete localStorage["time-to-work"];
+            window.location.reload(true);
+            return;
+        }
+
         startTimer();
     }
     else {
