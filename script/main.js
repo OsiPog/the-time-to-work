@@ -21,7 +21,7 @@ function stopTimer() {
     button_timer.className = "off";
 
     // Resetting the timer button
-    button_text.innerText = "Start Working";
+    button_timer.value = "Start Working";
 
     // Adding the end-timestamp to the entry in history
     config.history[0][2] = Math.round(Date.now()/1000);
@@ -43,7 +43,7 @@ function visualTimer() {
 
     let elapsed = Math.round(Date.now()/1000 - config.started_at);
 
-    button_text.innerText = convertSecondsToTime(elapsed);
+    button_timer.value = convertSecondsToTime(elapsed);
 
     saveConfig();
 
@@ -57,6 +57,7 @@ function visualTimer() {
 // This is called when the button got clicked.
 function clickedButton() {
     if (button_timer.className === "off") {
+
         // Testing for clear history command.
         if (input_work_type.value === "HARD_RESET") {
             delete localStorage["time-to-work"];
@@ -76,10 +77,9 @@ function clickedButton() {
 let config = getConfig();
 
 // These elements are needed very often thus they are global.
-let button_timer = document.querySelector("button#timer");
-let button_text = button_timer.querySelector("p");
-let input_work_type = document.querySelector("input#type_of_work");
-let div_history_container = document.querySelector("div#history_container");
+let button_timer = document.querySelector("input#timer-button");
+let input_work_type = document.querySelector("input#work-type-input");
+let div_history_container = document.querySelector("div#history-container");
 
 // Connecting the click function to the click event
 button_timer.addEventListener("click", clickedButton);

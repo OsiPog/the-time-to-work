@@ -8,33 +8,30 @@
         <h1>Time to Work!</h1>
 
         <!-- <h2>History</h2> -->
-        <div id="history_container">
-            <table hidden id="sample_history_entry" class="history_entry">
-                <tr>
-                    <td class="type_of_work_text">
-                        A well thought out work type that describes the work
-                    </td>
-                    <td class="type_of_work_duration">
-                        01:02:03
-                    </td>
-                    <td class="history_entry_control">
-                        <img src="img/trash.png" title="Delete entry" class="history_entry_control_button">
-                        <img src="img/copy_up.png" title="Copy text box content here" class="history_entry_control_button">
-                        <img src="img/copy_down.png" title="Copy type of work into text box" class="history_entry_control_button">
-                    </td>
-                </tr>
-            </table>
+        <div id="history-container">
+            <div hidden id="sample-history-entry" class="history-entry">
+                <div class="history-entry-text">
+                    A well thought out work type
+                </div>
+                <div class="history-entry-duration">
+                    01:02:03
+                </div>
+                <div class="history-entry-control">
+                    <img src="img/trash.png" title="Delete entry" class="history-entry-control-button">
+                    <img src="img/copy_up.png" title="Copy text box content here" class="history-entry-control-button">
+                    <img src="img/copy_down.png" title="Copy type of work into text box" class="history-entry-control-button">
+                </div>
+            </div>
         </div>
 
-        <input type="text" id="type_of_work" class="work_type_input" placeholder="Enter a type of work">
 
-        <button type="button" id="timer" class="off">
-            <p class="button_text">Start Working<p>
-        </button>
-        
-        <script src="script/utils.js"></script>
+        <input type="text" id="work-type-input" placeholder="Enter a type of work">
+
+        <input type="button" id="timer-button" class="off" value="Start Working"/>
+
+        <!-- <script src="script/utils.js"></script>
         <script src="script/history.js"></script>
         <script src="script/config_loader.js"></script>
-        <script src="script/main.js"></script>
+        <script src="script/main.js"></script> -->
     </body>
 </html>
