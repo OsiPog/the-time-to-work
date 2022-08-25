@@ -1,5 +1,5 @@
 function updateHistory() {
-    let all_entries = div_history_container.querySelectorAll("table.history_entry");
+    let all_entries = div_history_container.querySelectorAll("div.history-entry");
     let sample_entry = all_entries[all_entries.length-1];
 
     let until_index; // Marks until which index the list has to be gone through.
@@ -10,7 +10,7 @@ function updateHistory() {
         // Going through all history entries to see which is the last one
         // which is presented on the site. (to know which ones have to be added)
         for (let i=0;i<config.history.length;i++) {
-            console.log(Number(all_entries[0].id), "===", Number(config.history[i][1]));
+            // console.log(Number(all_entries[0].id), "===", Number(config.history[i][1]));
             if (Number(all_entries[0].id) === Number(config.history[i][1])) {
                 until_index = i;
                 break;
@@ -18,27 +18,28 @@ function updateHistory() {
         }
     }
 
-    console.log("until_index=",until_index);
+    // console.log("until_index=",until_index);
 
     for(let i=0;i<until_index;i++) {
         let config_entry = config.history[i];
         
         if (config_entry[2] === -1) continue;
 
-        // Getting the HTML elements
+        // Getting the HTML elements.
         let new_entry = sample_entry.cloneNode(true);
-        let text = new_entry.querySelector("tr>td.type_of_work_text");
-        let duration = new_entry.querySelector("tr>td.type_of_work_duration");
-        let buttons = new_entry.querySelectorAll("tr>td.history_entry_control>img");
+        let text = new_entry.querySelector("div.history-entry-text");
+        let duration = new_entry.querySelector("div.history-entry-duration");
+        let buttons = new_entry.querySelectorAll("div.history-entry-control>img");
         
-        // Changing the default values
+        // Changing the default values.
         new_entry.removeAttribute("hidden");
+        // Setting the ID to the unix timestamp when the work started.
         new_entry.setAttribute("id", config_entry[1]);
+        // The text will be the work type.
         text.innerText = config_entry[0];
         duration.innerText = convertSecondsToTime(config_entry[2] - config_entry[1]);
         
         // Giving the buttons a function
-
         // Trash icon
         buttons[0].addEventListener("click", function() {
             // Erasing every memory to this entry
