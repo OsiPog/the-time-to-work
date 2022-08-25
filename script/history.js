@@ -42,10 +42,28 @@ function updateHistory() {
         // Giving the buttons a function
         // Trash icon
         buttons[0].addEventListener("click", function() {
-            // Erasing every memory to this entry
-            div_history_container.removeChild(new_entry);
-            config.history.pop(i);
-            saveConfig();
+
+            // Sliding out
+            new_entry.classList.add("smooth-transition");
+            new_entry.setAttribute("style","transform: translate(100%,0)");
+
+            // Waiting for sliding out and then sliding up
+            setTimeout(function() {
+                // Transition container by height of removed element
+                div_history_container.classList.add("smooth-transition");
+                div_history_container.setAttribute("style",
+                    "transform: translate(0,-" + new_entry.offsetHeight + "px)");
+            }, 500);
+            
+            // After both animations, delete
+            setTimeout(function() {
+                // Erasing every memory to this entry
+                div_history_container.removeChild(new_entry);
+                div_history_container.classList.remove("smooth-transition");
+                div_history_container.removeAttribute("style");
+                config.history.pop(i);
+                saveConfig();
+            }, 1000)
         })
 
         // Copy up icon
@@ -62,7 +80,18 @@ function updateHistory() {
             input_work_type.value = config.history[i][0];
         })
 
-        all_entries[0].before(new_entry);
+        // Adding the new entry to the current displayed entries
+        // Sliding down of the history container
+        div_history_container.classList.add("smooth-transition");
+        div_history_container.setAttribute("style",
+            "transform: translate(0," + new_entry.offsetHeight + "px)");
+
+        // After sliding down, add entry and remove offset
+        setTimeout( function() {
+            all_entries[0].before(new_entry);
+            div_history_container.classList.remove("smooth-transition");
+            div_history_container.removeAttribute("style");
+        }, 500);
     }
 
 

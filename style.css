@@ -2,9 +2,14 @@
     font-size: 16px;
 }
 
-/* This attribute doesn't work with flex-box, so I'll make it myself */
+/* This attribute doesn't work with flexbox, so I'll make it myself */
 [hidden] {
     display: none !important;
+}
+
+@keyframes slide-in {
+    from {transform: translate(-100%, 0)}
+    to {transform: translate(0, 0)}
 }
 
 body {
@@ -27,6 +32,8 @@ h2 {
 #history-container {
     max-height: 10rem;
     overflow-y: auto;
+    scrollbar-width: none;
+    overflow-x: hidden;
 
     display: flex;
     flex-direction: column;
@@ -34,7 +41,8 @@ h2 {
 }
 
 #work-type-input {
-    margin-top: 1rem;
+    margin-top: 0.4rem;
+    margin-bottom: 0.4rem;
     min-width: 15rem;
     max-width: 15rem;
 
@@ -42,7 +50,6 @@ h2 {
 }
 
 input#timer-button {
-    margin-top: 0.4rem;
     cursor: pointer;
     border: none;
     border-radius: 0.5rem;
@@ -64,6 +71,12 @@ input#timer-button {
 .on {background-color: #00bb92;}
 .on:hover {background-color: #00a581;}
 
+.smooth-transition {
+    transition-property: all;
+    transition-duration: 0.5s;
+    transition-timing-function: ease-in-out;
+}
+
 .history-entry {
     background-color: #8fc9ff;
     border: 0.4rem;
@@ -80,6 +93,10 @@ input#timer-button {
     display: flex;
     flex-direction: row;
     align-items: center;
+
+    animation-name: slide-in;
+    animation-duration: 0.5s;
+    animation-timing-function: ease-out;
 }
 
 .history-entry-text {
