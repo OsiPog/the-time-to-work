@@ -7,9 +7,15 @@
     display: none !important;
 }
 
-@keyframes slide-in {
-    from {transform: translate(-100%, 0)}
-    to {transform: translate(0, 0)}
+@keyframes appear {
+    from {
+        max-height: 0;
+        opacity: 0;
+    }
+    to {
+        max-height: 10rem;
+        opacity: 100%;
+    }
 }
 
 body {
@@ -30,7 +36,12 @@ h2 {
 
 
 #history-container {
+    background-color: #d7e7ff;
+    border-radius: 0.2rem;
+    
     max-height: 10rem;
+    min-height: 10rem;
+
     overflow-y: auto;
     scrollbar-width: none;
     overflow-x: hidden;
@@ -71,12 +82,6 @@ input#timer-button {
 .on {background-color: #00bb92;}
 .on:hover {background-color: #00a581;}
 
-.smooth-transition {
-    transition-property: all;
-    transition-duration: 0.5s;
-    transition-timing-function: ease-in-out;
-}
-
 .history-entry {
     background-color: #8fc9ff;
     border: 0.4rem;
@@ -85,18 +90,26 @@ input#timer-button {
     border-left-style: solid;
     border-left-color: #0586ff;
 
-    margin-top: 0.2rem;
+    margin-bottom: 0.2rem;
 
-    max-width: inherit;
-    min-width: inherit;
+    max-height: 10rem; /* Important for shrinking animation on deletion */
 
     display: flex;
     flex-direction: row;
+    flex-basis: auto;
+    flex-shrink: 0;
+    flex-grow: 0;
     align-items: center;
 
-    animation-name: slide-in;
-    animation-duration: 0.5s;
-    animation-timing-function: ease-out;
+    overflow-y: hidden;
+
+    animation-name: appear;
+    animation-duration: 0.3s;
+    animation-timing-function: ease-in;
+
+    transition-property: all;
+    transition-duration: 0.3s;
+    transition-timing-function: ease-out;
 }
 
 .history-entry-text {
