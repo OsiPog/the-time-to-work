@@ -1,5 +1,6 @@
 :root {
     font-size: 16px;
+    scrollbar-width: none;
 }
 
 /* This attribute doesn't work with flexbox, so I'll make it myself */
@@ -36,11 +37,11 @@ h2 {
 
 
 #history-container {
-    background-color: #d7e7ff;
+    /* background-color: #d7e7ff;
     border-radius: 0.2rem;
     
     max-height: 10rem;
-    min-height: 10rem;
+    min-height: 10rem; */
 
     overflow-y: auto;
     scrollbar-width: none;

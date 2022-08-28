@@ -69,6 +69,7 @@ function updateHistory() {
             input_work_type.value = config.history[i][0];
         })
 
+        
         // Adding the new entry to the current displayed entries
         all_entries[0].before(new_entry);
     }

@@ -57,14 +57,7 @@ function visualTimer() {
 // This is called when the button got clicked.
 function clickedButton() {
     if (button_timer.className === "off") {
-
-        // Testing for clear history command.
-        if (input_work_type.value === "HARD_RESET") {
-            delete localStorage["time-to-work"];
-            window.location.reload(true);
-            return;
-        }
-
+        if (executeDebugCommand()) return;
         startTimer();
     }
     else {
@@ -72,22 +65,42 @@ function clickedButton() {
     }
 }
 
-
-// Initialize global variables.
-let config = getConfig();
-
-// These elements are needed very often thus they are global.
-let button_timer = document.querySelector("input#timer-button");
-let input_work_type = document.querySelector("input#work-type-input");
-let div_history_container = document.querySelector("div#history-container");
-
-// Connecting the click function to the click event
-button_timer.addEventListener("click", clickedButton);
-
-// Starting the timer if the popup was closed with the timer on.
-if (config.started_at !== -1) {
-    startTimer();
+function executeDebugCommand() {
+    switch(input_work_type.value) {
+        case "HARD_RESET":
+            browser.storage.local.set({"config":null});
+            window.location.reload(true);
+            return true;
+        default:
+            return false;
+    }
 }
 
-// Creating the visual history.
-updateHistory();
+async function init() {
+    // Initialize global variables.
+    config = await getConfig();
+
+    // These elements are needed very often thus they are global.
+    button_timer = document.querySelector("input#timer-button");
+    input_work_type = document.querySelector("input#work-type-input");
+    div_history_container = document.querySelector("div#history-container");
+
+    // Connecting the click function to the click event
+    button_timer.addEventListener("click", clickedButton);
+
+    // Starting the timer if the popup was closed with the timer on.
+    if (config.started_at !== -1) {
+        startTimer();
+    }
+
+    // Creating the visual history.
+    updateHistory();
+}
+
+// Declare globals
+let config;
+let button_timer;
+let input_work_type;
+let div_history_container;
+
+init();
