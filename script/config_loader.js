@@ -1,12 +1,6 @@
 function saveConfig() {
     let encrypted = vigenere(JSON.stringify(config), "time-to-work")
     browser.storage.local.set({"config": encrypted});
-
-    let func = async () => {
-        let val = await browser.storage.local.get("config");
-        console.log(val);
-    }
-    func();
 }
 
 async function getConfig() {
@@ -14,9 +8,9 @@ async function getConfig() {
     encrypted = encrypted.config;
 
     let decrypted = vigenere(encrypted, "time-to-work", true);
-    console.log(decrypted);
+
     if (!decrypted) {
-        return {"started_at":-1, "current_work_type":"", "history":[]};
+        return {"started_at":-1, "history":[]};
     }
 
     return JSON.parse(decrypted);

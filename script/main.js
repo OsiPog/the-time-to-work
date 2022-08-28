@@ -78,7 +78,9 @@ function executeDebugCommand() {
 
 async function init() {
     // Initialize global variables.
-    config = await getConfig();
+    config = await getConfig().catch(e => {
+        console.log(e);
+    });
 
     // These elements are needed very often thus they are global.
     button_timer = document.querySelector("input#timer-button");
