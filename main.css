@@ -1,0 +1,158 @@
+:root {
+    font-size: 16px;
+    scrollbar-width: none;
+
+    /*colors*/
+    --color-submit: #05AA5D;
+    --color-submit-hover: #009952;
+    --color-submit-text: #FFFFFF;
+
+    --color-active: #00bb92;
+    --color-active-hover: #00a581;
+
+    --color-entry: #8fc9ff;
+    --color-entry-side: #0586ff;
+}
+
+/* This attribute doesn't work with flexbox, so I'll make it myself */
+[hidden] {
+    display: none !important;
+}
+
+body {
+    margin: 0.2rem;
+}
+
+
+
+
+/* popup.html */
+
+@keyframes appear {
+    from {
+        max-height: 0;
+        opacity: 0;
+    }
+    to {
+        max-height: 10rem;
+        opacity: 100%;
+    }
+}
+
+
+#work-type-input {
+    margin-top: 0.4rem;
+    margin-bottom: 0.4rem;
+    min-width: 15rem;
+    max-width: 15rem;
+
+    align-self: center;
+}
+
+input#timer-button {
+    cursor: pointer;
+    border: none;
+    border-radius: 0.5rem;
+    min-width: 15rem;
+    max-width: 15rem;
+
+    align-self: center;
+
+    color: var(--color-submit-text);
+    text-align: center;
+    font-size: 2rem;
+    
+    padding: 0.9rem;
+
+    transition-property: all;
+    transition-duration: 0.3s;
+    transition-timing-function: ease-out;
+}
+
+
+.off {background-color: var(--color-submit);}
+.off:hover {background-color: var(--color-submit-hover);}
+.on {background-color: var(--color-active);}
+.on:hover {background-color: var(--color-active-hover);}
+
+#list {
+    /* background-color: #d7e7ff;
+    border-radius: 0.2rem;
+    */
+
+    max-height: 10rem;
+
+    overflow-y: auto;
+    scrollbar-width: none;
+    overflow-x: hidden;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+#list .entry {
+        background-color: var(--color-entry);
+        border: 0.4rem;
+        border-top-right-radius: 0.3rem;
+        border-bottom-right-radius: 0.3rem;
+        border-left-style: solid;
+        border-left-color: var(--color-entry-side);
+
+        margin-bottom: 0.2rem;
+
+        max-height: 10rem; /* Important for shrinking animation on deletion */
+
+        display: flex;
+        flex-direction: row;
+        flex-basis: auto;
+        flex-shrink: 0;
+        flex-grow: 0;
+        align-items: center;
+
+        overflow-y: hidden;
+
+        animation-name: appear;
+        animation-duration: 0.3s;
+        animation-timing-function: ease-in;
+
+        transition-property: all;
+        transition-duration: 0.3s;
+        transition-timing-function: ease-out;
+    }
+
+#list .entry .text {
+            font-size: 1.2rem;
+            padding: 0.25rem;
+
+            overflow-wrap: normal;
+
+            flex: 6;
+        }
+
+#list .entry .duration {
+            font-size: 1.5rem;
+            text-align: center;
+
+            flex: 4;
+        }
+
+#list .entry .control {
+            align-items: flex-end;
+
+            display: flex;
+            flex-direction: column;
+
+            flex: 1;
+        }
+
+#list .entry .control .button {
+                height: 1.4rem;
+                width: 1.4rem;
+                opacity: 75%;
+                cursor: pointer;
+
+                padding: 0.1rem;
+            }
+#list .entry .control .button:hover {
+                opacity: 100%;
+            }
