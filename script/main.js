@@ -54,7 +54,7 @@ function visualTimer() {
     
 }
 
-// This is called when the button got clicked.
+// This is called when the button is clicked.
 function clickedButton() {
     if (button_timer.className === "off") {
         if (executeDebugCommand()) return;
@@ -85,7 +85,7 @@ async function init() {
     // These elements are needed very often thus they are global.
     button_timer = document.querySelector("input#timer-button");
     input_work_type = document.querySelector("input#work-type-input");
-    div_history_container = document.querySelector("div#history-container");
+    div_history = document.querySelector("div#list");
 
     // Connecting the click function to the click event
     button_timer.addEventListener("click", clickedButton);
@@ -103,6 +103,6 @@ async function init() {
 let config;
 let button_timer;
 let input_work_type;
-let div_history_container;
+let div_history;
 
 init();

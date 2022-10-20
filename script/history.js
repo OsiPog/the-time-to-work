@@ -1,5 +1,5 @@
 function updateHistory() {
-    let all_entries = div_history_container.querySelectorAll("div.history-entry");
+    let all_entries = div_history.querySelectorAll("div.entry");
     let sample_entry = all_entries[all_entries.length - 1];
 
     let until_index; // Marks until which index the list has to be gone through.
@@ -27,9 +27,9 @@ function updateHistory() {
 
         // Getting the HTML elements.
         let new_entry = sample_entry.cloneNode(true);
-        let text = new_entry.querySelector("div.history-entry-text");
-        let duration = new_entry.querySelector("div.history-entry-duration");
-        let buttons = new_entry.querySelectorAll("div.history-entry-control>img");
+        let text = new_entry.querySelector("div.text");
+        let duration = new_entry.querySelector("div.duration");
+        let buttons = new_entry.querySelectorAll("div.control>img");
 
         // Changing the default values.
         new_entry.removeAttribute("hidden");
@@ -49,7 +49,7 @@ function updateHistory() {
             // After animations, delete
             setTimeout(function () {
                 // Erasing every memory to this entry
-                div_history_container.removeChild(new_entry);
+                div_history.removeChild(new_entry);
                 config.history.pop(i);
                 saveConfig();
             }, 300)

@@ -1,25 +1,25 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link rel="stylesheet" type="text/css" href="style.css">
+        <link rel="stylesheet" type="text/css" href="main.css">
     </head>
     <body>
         
         <h1>Time to Work!</h1>
 
-        <!-- <h2>History</h2> -->
-        <div id="history-container">
-            <div hidden id="sample-history-entry" class="history-entry">
-                <div class="history-entry-text">
+        <!-- History -->
+        <div id="list">
+            <div hidden id="sample-history-entry" class="entry">
+                <div class="text">
                     A well thought out work type
                 </div>
-                <div class="history-entry-duration">
+                <div class="duration">
                     01:02:03
                 </div>
-                <div class="history-entry-control">
-                    <img src="img/trash.png" title="Delete entry" class="history-entry-control-button">
-                    <img src="img/copy_up.png" title="Copy text box content here" class="history-entry-control-button">
-                    <img src="img/copy_down.png" title="Copy type of work into text box" class="history-entry-control-button">
+                <div class="control">
+                    <img src="img/trash.png" title="Delete entry" class="button">
+                    <img src="img/copy_up.png" title="Copy text box content here" class="button">
+                    <img src="img/copy_down.png" title="Copy type of work into text box" class="button">
                 </div>
             </div>
         </div>
@@ -29,6 +29,7 @@
 
         <input type="button" id="timer-button" class="off" value="Start Working"/>
 
+        <!-- Loading scripts -->
         <script src="script/utils.js"></script>
         <script src="script/history.js"></script>
         <script src="script/config_loader.js"></script>
