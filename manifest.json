@@ -15,7 +15,12 @@
 
     "permissions": [
         "storage"
-    ]
+    ],
+
+	"options_ui": {
+        "page": "analytics.html",
+        "open_in_tab": true
+    }
 
 
 }

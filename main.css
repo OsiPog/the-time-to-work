@@ -3,6 +3,10 @@
     scrollbar-width: none;
 
     /*colors*/
+    --color-text: #1d1d1d;
+
+    --color-hline: #49acd37a;
+
     --color-submit: #05AA5D;
     --color-submit-hover: #009952;
     --color-submit-text: #FFFFFF;
@@ -12,6 +16,9 @@
 
     --color-entry: #8fc9ff;
     --color-entry-side: #0586ff;
+
+    /*margin*/
+    --margin-input: 0.2rem;
 }
 
 /* This attribute doesn't work with flexbox, so I'll make it myself */
@@ -19,10 +26,43 @@
     display: none !important;
 }
 
-body {
-    margin: 0.2rem;
+h1 {
+    color: var(--color-text);
+    font-size: 1.5rem;
+    line-height: inherit;
+
+    padding: var(--margin-input);
+
+    border-bottom-style: solid;
+    border-color: var(--color-hline);
+    border-width: 2px;
+
+    min-width: 50vw;
 }
 
+.submit {
+    cursor: pointer;
+    border: none;
+
+    align-self: center;
+
+    color: var(--color-submit-text);
+    text-align: center;
+
+    margin: var(--margin-input); 
+
+    transition-property: all;
+    transition-duration: 0.1s;
+    transition-timing-function: ease-out;
+
+    background-color: var(--color-submit);
+}
+.submit:hover {background-color: var(--color-submit-hover);}
+
+.flex-con-h {
+    display: flex;
+    flex-direction: row;
+}
 
 
 
@@ -41,39 +81,41 @@ body {
 
 
 #work-type-input {
-    margin-top: 0.4rem;
-    margin-bottom: 0.4rem;
-    min-width: 15rem;
-    max-width: 15rem;
+    flex: 2;
+
+    margin: var(--margin-input);
+
+    border-style: solid;
+    border-color: var(--color-hline);
+    border-radius: 0.1rem;
 
     align-self: center;
 }
+input#work-type-input:focus {
+    outline: none
+}
+
+input#open-analytics {
+    font-size: 1rem;
+
+    border-radius: 0.3rem;
+
+    padding: 0.2rem;
+
+    flex: 1
+} 
 
 input#timer-button {
-    cursor: pointer;
-    border: none;
     border-radius: 0.5rem;
     min-width: 15rem;
     max-width: 15rem;
 
-    align-self: center;
-
-    color: var(--color-submit-text);
-    text-align: center;
     font-size: 2rem;
     
     padding: 0.9rem;
-
-    transition-property: all;
-    transition-duration: 0.3s;
-    transition-timing-function: ease-out;
 }
-
-
-.off {background-color: var(--color-submit);}
-.off:hover {background-color: var(--color-submit-hover);}
-.on {background-color: var(--color-active);}
-.on:hover {background-color: var(--color-active-hover);}
+input#timer-button.active {background-color: var(--color-active);}
+input#timer-button.active:hover {background-color: var(--color-active-hover);}
 
 #list {
     /* background-color: #d7e7ff;
@@ -152,6 +194,10 @@ input#timer-button {
                 cursor: pointer;
 
                 padding: 0.1rem;
+
+                transition-property: all;
+                transition-duration: 0.1s;
+                transition-timing-function: ease-out;
             }
 #list .entry .control .button:hover {
                 opacity: 100%;

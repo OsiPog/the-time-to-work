@@ -1,7 +1,7 @@
 // Starting the timer
 function startTimer() {
-    // Changing the class
-    button_timer.className = "on";
+    // Updating the class
+    button_timer.classList.add("active")
 
     // Starting the visual timer (Text inside button will be the elapsed time).
     if (config.started_at === -1) {
@@ -18,7 +18,7 @@ function startTimer() {
 
 function stopTimer() {
     // Updating the class
-    button_timer.className = "off";
+    button_timer.classList.remove("active")
 
     // Resetting the timer button
     button_timer.value = "Start Working";
@@ -37,7 +37,7 @@ function stopTimer() {
 }
 
 function visualTimer() {
-    if (button_timer.className !== "on") {
+    if (!button_timer.classList.contains("active")) {
         return;
     }
 
@@ -56,12 +56,13 @@ function visualTimer() {
 
 // This is called when the button is clicked.
 function clickedButton() {
-    if (button_timer.className === "off") {
-        if (executeDebugCommand()) return;
-        startTimer();
+
+    if (button_timer.classList.contains("active")) {
+        stopTimer();
     }
     else {
-        stopTimer();
+        if (executeDebugCommand()) return;
+        startTimer();
     }
 }
 
@@ -84,11 +85,17 @@ async function init() {
 
     // These elements are needed very often thus they are global.
     button_timer = document.querySelector("input#timer-button");
+    button_analytics = document.querySelector("#open-analytics")
     input_work_type = document.querySelector("input#work-type-input");
     div_history = document.querySelector("div#list");
 
     // Connecting the click function to the click event
     button_timer.addEventListener("click", clickedButton);
+
+    // Making the Analytics-Button open the options page.
+    button_analytics.addEventListener("click", function() {
+        browser.runtime.openOptionsPage()
+    });
 
     // Starting the timer if the popup was closed with the timer on.
     if (config.started_at !== -1) {
@@ -102,6 +109,7 @@ async function init() {
 // Declare globals
 let config;
 let button_timer;
+let button_analytics;
 let input_work_type;
 let div_history;
 

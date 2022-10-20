@@ -2,13 +2,13 @@ function updateHistory() {
     let all_entries = div_history.querySelectorAll("div.entry");
     let sample_entry = all_entries[all_entries.length - 1];
 
-    let until_index; // Marks until which index the list has to be gone through.
+    let until_index; // Marks until which index the list has to be walked through.
     if (all_entries.length === 1) { // if theres nothing except the sample
         until_index = config.history.length;
     }
     else {
         // Going through all history entries to see which is the last one
-        // which is presented on the site. (to know which ones have to be added)
+        // presented. (to know which ones have to be added)
         for (let i = 0; i < config.history.length; i++) {
             // console.log(Number(all_entries[0].id), "===", Number(config.history[i][1]));
             if (Number(all_entries[0].id) === Number(config.history[i][1])) {
