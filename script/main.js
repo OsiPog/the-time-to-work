@@ -65,7 +65,7 @@ const executeDebugCommand = () => {
     }
 }
 
-async function init() {
+const init = async() => {
     // Initialize global variables.
     config = await getConfig().catch(e => {
         console.log(e);
