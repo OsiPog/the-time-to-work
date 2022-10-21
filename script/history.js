@@ -1,6 +1,6 @@
-function updateHistory(seperation=null) {
-    let all_entries = div_history.querySelectorAll("div.entry");
-    let sample_entry = all_entries[all_entries.length - 1];
+const updateHistory = (seperation=null) => {
+    const all_entries = div_history.querySelectorAll("div.entry");
+    const sample_entry = all_entries[all_entries.length - 1];
 
     let until_index; // Marks until which index the list has to be walked through.
     if (all_entries.length === 1) { // if theres nothing except the sample
@@ -21,15 +21,15 @@ function updateHistory(seperation=null) {
     // console.log("until_index=",until_index);
 
     for (let i = 0; i < until_index; i++) {
-        let config_entry = config.history[i];
+        const config_entry = config.history[i];
 
         if (config_entry[2] === -1) continue;
 
         // Getting the HTML elements.
-        let new_entry = sample_entry.cloneNode(true);
-        let text = new_entry.querySelector("div.text");
-        let duration = new_entry.querySelector("div.duration");
-        let buttons = new_entry.querySelectorAll("div.control>img");
+        const new_entry = sample_entry.cloneNode(true);
+        const text = new_entry.querySelector("div.text");
+        const duration = new_entry.querySelector("div.duration");
+        const buttons = new_entry.querySelectorAll("div.control>img");
 
         // Changing the default values.
         new_entry.removeAttribute("hidden");
@@ -41,7 +41,7 @@ function updateHistory(seperation=null) {
 
         // Giving the buttons a function
         // Trash icon
-        buttons[0].addEventListener("click", function () {
+        buttons[0].addEventListener("click", () => {
 
             // Shriking and fading out
             new_entry.setAttribute("style", "max-height:0;opacity:0");
@@ -56,7 +56,7 @@ function updateHistory(seperation=null) {
         })
 
         // Copy up icon
-        buttons[1].addEventListener("click", function () {
+        buttons[1].addEventListener("click", () => {
             // Changing the input fields value to this entrys value
             config.history[i][0] = input_work_type.value;
             text.innerText = input_work_type.value;
@@ -64,7 +64,7 @@ function updateHistory(seperation=null) {
         })
 
         // Copy down icon
-        buttons[2].addEventListener("click", function () {
+        buttons[2].addEventListener("click", () => {
             // Changing the input fields value to this entrys value
             input_work_type.value = config.history[i][0];
         })
@@ -73,8 +73,4 @@ function updateHistory(seperation=null) {
         // Adding the new entry to the current displayed entries
         all_entries[0].before(new_entry);
     }
-
-
-
-
 }

@@ -1,5 +1,5 @@
 // Starting the timer
-function startTimer() {
+const startTimer = () => {
     // Updating the class
     button_timer.classList.add("active")
 
@@ -16,19 +16,19 @@ function startTimer() {
     visualTimer();
 }
 
-function stopTimer() {
+const stopTimer = () => {
     // Updating the class
-    button_timer.classList.remove("active")
+    button_timer.classList.remove("active");
 
     // Resetting the timer button
     button_timer.value = "Start Working";
 
     // Adding the end-timestamp to the entry in history
-    config.history[0][2] = Math.round(Date.now()/1000);
+    config.history[0][2] = Math.round(Date.now() / 1000);
 
     // resetting the visual timer
     config.started_at = -1;
-    
+
     // saving the changed config
     saveConfig();
 
@@ -36,37 +36,25 @@ function stopTimer() {
     updateHistory();
 }
 
-function visualTimer() {
+const visualTimer = () => {
     if (!button_timer.classList.contains("active")) {
         return;
     }
 
-    let elapsed = Math.round(Date.now()/1000 - config.started_at);
+    const elapsed = Math.round(Date.now()/1000 - config.started_at);
 
     button_timer.value = convertSecondsToTime(elapsed);
 
     saveConfig();
 
     // Delaying the next "recursive" call by 1 second.
-    setTimeout(function() {
+    setTimeout(() => {
         visualTimer();
     }, 1000);
     
 }
 
-// This is called when the button is clicked.
-function clickedButton() {
-
-    if (button_timer.classList.contains("active")) {
-        stopTimer();
-    }
-    else {
-        if (executeDebugCommand()) return;
-        startTimer();
-    }
-}
-
-function executeDebugCommand() {
+const executeDebugCommand = () => {
     switch(input_work_type.value) {
         case "HARD_RESET":
             browser.storage.local.set({"config":null});
@@ -89,11 +77,19 @@ async function init() {
     input_work_type = document.querySelector("input#work-type-input");
     div_history = document.querySelector("div#list");
 
-    // Connecting the click function to the click event
-    button_timer.addEventListener("click", clickedButton);
+    // Toggle the timer on click
+    button_timer.addEventListener("click", () => {
+        if (button_timer.classList.contains("active")) {
+            stopTimer();
+        }
+        else {
+            if (executeDebugCommand()) return;
+            startTimer();
+        }
+    });
 
     // Making the Analytics-Button open the options page.
-    button_analytics.addEventListener("click", function() {
+    button_analytics.addEventListener("click", () => {
         browser.runtime.openOptionsPage()
     });
 
