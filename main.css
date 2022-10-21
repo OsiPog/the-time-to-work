@@ -5,7 +5,8 @@
     /*colors*/
     --color-text: #1d1d1d;
 
-    --color-hline: #49acd37a;
+    --color-seperator: #49acd37a;
+    --color-seperator-text: #357f9c;
 
     --color-submit: #05AA5D;
     --color-submit-hover: #009952;
@@ -34,7 +35,7 @@ h1 {
     padding: var(--margin-input);
 
     border-bottom-style: solid;
-    border-color: var(--color-hline);
+    border-color: var(--color-seperator);
     border-width: 2px;
 
     min-width: 50vw;
@@ -86,7 +87,7 @@ h1 {
     margin: var(--margin-input);
 
     border-style: solid;
-    border-color: var(--color-hline);
+    border-color: var(--color-seperator);
     border-radius: 0.1rem;
 
     align-self: center;
@@ -140,7 +141,7 @@ input#timer-button.active:hover {background-color: var(--color-active-hover);}
         border-left-style: solid;
         border-left-color: var(--color-entry-side);
 
-        margin-bottom: 0.2rem;
+        margin: 0 0 0.2rem 0.4rem;
 
         max-height: 10rem; /* Important for shrinking animation on deletion */
 
@@ -202,3 +203,29 @@ input#timer-button.active:hover {background-color: var(--color-active-hover);}
 #list .entry .control .button:hover {
                 opacity: 100%;
             }
+
+#list .seperator {
+    color: var(--color-seperator-text);
+    
+    margin: 0.3rem 0 0.3rem 0;
+    padding-left: 0.2rem;
+
+    border-left-style: solid;
+    border-width: 3px;
+    border-color: var(--color-seperator);
+
+    position: relative;
+}
+#list .seperator::after {
+    content: "";
+    display: inline-block;
+    position: absolute;
+    
+    background-color: var(--color-seperator);
+    
+    height: 2px;
+    width: 100%;
+
+    top: 50%;
+    transform: translateX(0.2rem)
+}

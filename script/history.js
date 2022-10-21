@@ -1,4 +1,4 @@
-function updateHistory() {
+function updateHistory(seperation=null) {
     let all_entries = div_history.querySelectorAll("div.entry");
     let sample_entry = all_entries[all_entries.length - 1];
 
