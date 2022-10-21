@@ -1,4 +1,5 @@
 const updateHistory = (seperation=null) => {
+    const sample_seperator = div_history.querySelector("div#sample-history-seperator")
     const all_entries = div_history.querySelectorAll("div.entry");
     const sample_entry = all_entries[all_entries.length - 1];
 

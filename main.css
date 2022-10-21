@@ -3,10 +3,9 @@
     scrollbar-width: none;
 
     /*colors*/
-    --color-text: #1d1d1d;
+    --color-text: #357f9c;
 
     --color-seperator: #49acd37a;
-    --color-seperator-text: #357f9c;
 
     --color-submit: #05AA5D;
     --color-submit-hover: #009952;
@@ -205,7 +204,7 @@ input#timer-button.active:hover {background-color: var(--color-active-hover);}
             }
 
 #list .seperator {
-    color: var(--color-seperator-text);
+    color: var(--color-text);
     
     margin: 0.3rem 0 0.3rem 0;
     padding-left: 0.2rem;

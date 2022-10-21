@@ -16,10 +16,10 @@ const vigenere = (string, key_string, decrypt = false) => {
 		}
 		
 		// Getting the amount of shifting of the current char
-		const key = LETTERS.indexOf(key_char);
+		let key = LETTERS.indexOf(key_char);
 		if (decrypt) key *= -1;
 		
-		const index = LETTERS.indexOf(string[i]) + key;
+		let index = LETTERS.indexOf(string[i]) + key;
 		if (index > LETTERS.length-1) index -= LETTERS.length;
 		if (index < 0) index += LETTERS.length;
 		new_string += LETTERS[index];
