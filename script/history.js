@@ -1,6 +1,30 @@
-const updateHistory = (seperation=null) => {
-    const sample_seperator = div_history.querySelector("div#sample-history-seperator")
-    const all_entries = div_history.querySelectorAll("div.entry");
+const createSeperator = (string) => {
+    const sample_seperator = div_history.querySelector("div#sample-history-seperator");
+    const seperator = sample_seperator.cloneNode(true);
+
+    // Updating defaults
+    seperator.removeAttribute("hidden");
+    seperator.removeAttribute("id");
+    seperator.innerText = string;
+
+    return seperator
+}
+
+
+const updateHistory = (seperation="week",update_all=false) => {
+    // if this parameter is true, delete everything for a "true" update
+    if (update_all) {
+        // saving this to add it later
+        const sample_seperator = div_history.querySelector("div#sample-history-seperator");
+        const sample_entry = div_history.querySelector("div#sample-history-entry");
+        // deleting it all
+        div_history.innerHTML = "";
+
+        // adding the samples again
+        div_history.appendChild(sample_seperator);
+        div_history.appendChild(sample_entry);
+    }
+    let all_entries = div_history.querySelectorAll("div.entry");
     const sample_entry = all_entries[all_entries.length - 1];
 
     let until_index; // Marks until which index the list has to be walked through.
@@ -19,12 +43,12 @@ const updateHistory = (seperation=null) => {
         }
     }
 
-    // console.log("until_index=",until_index);
-
     for (let i = 0; i < until_index; i++) {
-        const config_entry = config.history[i];
+        const work_type = config.history[i][0];
+        const t0 = config.history[i][1];
+        const t1 = config.history[i][2];
 
-        if (config_entry[2] === -1) continue;
+        if (t1 === -1) continue;
 
         // Getting the HTML elements.
         const new_entry = sample_entry.cloneNode(true);
@@ -35,20 +59,18 @@ const updateHistory = (seperation=null) => {
         // Changing the default values.
         new_entry.removeAttribute("hidden");
         // Setting the ID to the unix timestamp when the work started.
-        new_entry.setAttribute("id", config_entry[1]);
+        new_entry.setAttribute("id", t0);
         // The text will be the work type.
-        text.innerText = config_entry[0];
-        duration.innerText = convertSecondsToTime(config_entry[2] - config_entry[1]);
+        text.innerText = work_type;
+        duration.innerText = convertSecondsToTime(t1 - t0);
 
-        // Giving the buttons a function
-        // Trash icon
+        // Buttons
+        // Trash
         buttons[0].addEventListener("click", () => {
-
             // Shriking and fading out
             new_entry.setAttribute("style", "max-height:0;opacity:0");
-
             // After animations, delete
-            setTimeout(function () {
+            setTimeout(()=> {
                 // Erasing every memory to this entry
                 div_history.removeChild(new_entry);
                 config.history.pop(i);
@@ -56,7 +78,7 @@ const updateHistory = (seperation=null) => {
             }, 300)
         })
 
-        // Copy up icon
+        // Copy up
         buttons[1].addEventListener("click", () => {
             // Changing the input fields value to this entrys value
             config.history[i][0] = input_work_type.value;
@@ -64,7 +86,7 @@ const updateHistory = (seperation=null) => {
             saveConfig();
         })
 
-        // Copy down icon
+        // Copy down
         buttons[2].addEventListener("click", () => {
             // Changing the input fields value to this entrys value
             input_work_type.value = config.history[i][0];
@@ -73,5 +95,63 @@ const updateHistory = (seperation=null) => {
         
         // Adding the new entry to the current displayed entries
         all_entries[0].before(new_entry);
+    }
+
+    // Seperators do not need to be left untouched so deleting all of them and
+    // creating them is the easiest solution.
+    const all_seperators = div_history.querySelectorAll("div.seperator");
+    all_seperators.forEach(element => {
+        if (element.id !== "sample-history-seperator") {
+            element.parentElement.removeChild(element);
+        }
+    });
+    
+    // Looking at each gap between the entries if a seperator is needed
+    // Getting all entries again as there are more now.
+    all_entries = div_history.querySelectorAll("div.entry");
+    for (let i = 0; i<all_entries.length;i++) {
+        // You can't check the gap when there isn't another one.
+        if ((i === all_entries.length -1)
+            || (all_entries[i].id === "sample-history-entry")) {
+            continue;
+        }
+        // Seperation happens between two elements. if it's the first put a 
+        // seperator anyway, as a kind of "heading".
+        let seperator;
+        switch(seperation) {
+            case "week":
+                // current element
+                const date0 = new Date(Number(all_entries[i].id)*1000);
+                const week0 = weekOfTheYear(date0);
+                const year0 = date0.getFullYear();
+
+                // If it's the first element in the list create a seperator or
+                // if the "heading"-like seperator is already created.
+                if (i === 0) {
+                    seperator = createSeperator(year0 + " Week " + week0);
+                    seperator.setAttribute("id", "")
+                    break;
+                }
+
+                // next element
+                const date1 = new Date(Number(all_entries[i-1].id)*1000);
+                const week1 = weekOfTheYear(date1);
+                const year1 = date1.getFullYear();
+                
+                // comparing the two weeks (and years)
+                console.log(i);
+                console.log(week1, week0)
+                console.log(year1, year0)
+                if ((week1 > week0) || (year1 > year0)) {
+                    seperator = createSeperator(year0 + " Week " + week0);
+                }
+                break;
+            default:
+                seperator = null;
+        }
+        // If a seperator got created add it.
+        if (seperator) {
+            all_entries[i].before(seperator);
+        }
     }
 }

@@ -56,8 +56,14 @@ const visualTimer = () => {
 
 const executeDebugCommand = () => {
     switch(input_work_type.value) {
-        case "HARD_RESET":
+        case "DEBUG:HARD_RESET":
             browser.storage.local.set({"config":null});
+            window.location.reload(true);
+            return true;
+        case "DEBUG:EDIT":
+            let timestamp = Number(prompt("Enter the new timestamp (seconds):"));
+            config.history[0][1] = timestamp;
+            saveConfig();
             window.location.reload(true);
             return true;
         default:

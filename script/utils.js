@@ -41,3 +41,9 @@ const convertSecondsToTime = (seconds) => {
 
     return h + ":" + min + ":" + s;
 }
+
+// Returns the week number of the year of a certain date
+const weekOfTheYear = (date) => {
+	//																sec  -min -h   -day  -week
+	return Math.floor((date - new Date(date.getFullYear(), 0, 0)) / 1000 / 60 / 60 / 24 / 7)
+}
