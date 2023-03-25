@@ -11,7 +11,7 @@ const createSeperator = (string) => {
 }
 
 
-const updateHistory = (seperation="week",update_all=false) => {
+const updateHistory = (seperation="week", update_all=false) => {
     // if this parameter is true, delete everything for a "true" update
     if (update_all) {
         // saving this to add it later
@@ -118,40 +118,15 @@ const updateHistory = (seperation="week",update_all=false) => {
         // Seperation happens between two elements. if it's the first put a 
         // seperator anyway, as a kind of "heading".
         let seperator;
-        switch(seperation) {
-            case "week":
-                // current element
-                const date0 = new Date(Number(all_entries[i].id)*1000);
-                const week0 = weekOfTheYear(date0);
-                const year0 = date0.getFullYear();
+        if (i === 0)
+            seperator = getSeperator(0, all_entries[i].id, seperation, true)
+        else
+            seperator = getSeperator(all_entries[i-1].id, all_entries[i].id, seperation)
 
-                // If it's the first element in the list create a seperator or
-                // if the "heading"-like seperator is already created.
-                if (i === 0) {
-                    seperator = createSeperator(year0 + " Week " + week0);
-                    seperator.setAttribute("id", "")
-                    break;
-                }
 
-                // next element
-                const date1 = new Date(Number(all_entries[i-1].id)*1000);
-                const week1 = weekOfTheYear(date1);
-                const year1 = date1.getFullYear();
-                
-                // comparing the two weeks (and years)
-                console.log(i);
-                console.log(week1, week0)
-                console.log(year1, year0)
-                if ((week1 > week0) || (year1 > year0)) {
-                    seperator = createSeperator(year0 + " Week " + week0);
-                }
-                break;
-            default:
-                seperator = null;
-        }
         // If a seperator got created add it.
         if (seperator) {
-            all_entries[i].before(seperator);
+            all_entries[i].before(createSeperator(seperator));
         }
     }
 }
