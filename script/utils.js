@@ -1,4 +1,4 @@
-const LETTERS = " s*G->9}XpL+[T]g3te{:0lSM%kEN&#!YFZmf:$jx<7VI58AaU?nzcduWr§KBPiO_JohHQC2DbvyR1w46q"
+const LETTERS = " s*G->9}XpL+[T]g3te{:0lSM%kEN&#!YFZmf$jx<7VI58AaU?nzicduWr§KBPO_JohHQC2DbvyR1w46q"
 
 // An implementation of the Vigenere encryption with an addition of safety.
 // (The used alphabet is randomized)

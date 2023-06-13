@@ -7,11 +7,17 @@ const getConfig = async() => {
     let encrypted = await browser.storage.local.get("config");
     encrypted = encrypted.config;
 
-    const decrypted = vigenere(encrypted, "time-to-work", true);
+    let decrypted = vigenere(encrypted, "time-to-work", true);
+    console.log(decrypted)
 
-    if (!decrypted) {
-        return {"started_at":-1, "history":[]};
-    }
+    if (!decrypted || !encrypted || encrypted === "" || decrypted === "") decrypted = "{}"
+    
+    const config = JSON.parse(decrypted)
 
-    return JSON.parse(decrypted);
+    config.started_at = config.started_at || -1
+    config.history = config.history || []
+    config.overtime_sum = config.overtime_sum || 0
+    config.overtime_limit = config.overtime_limit || 144000
+
+    return config;
 }
