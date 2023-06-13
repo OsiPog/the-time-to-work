@@ -5,6 +5,30 @@
         <link rel="stylesheet" type="text/css" href="main.css">
     </head>
     <body>
-        ...
+        <div class="flex-con-h">
+            <div id="list" style="width:25%">
+                <div hidden id="sample-history-seperator" class="seperator">2022 Week 42</div>
+                <div hidden id="sample-history-entry" class="entry">
+                    <div class="text">
+                        A well thought out work type
+                    </div>
+                    <div class="duration">
+                        01:02:03
+                    </div>
+                    <div class="control">
+                        <img src="img/trash.png" title="Delete entry" class="button">
+                        <img src="img/copy_up.png" title="Copy text box content here" class="button">
+                        <img src="img/copy_down.png" title="Copy type of work into text box" class="button">
+                    </div>
+                </div>
+            </div>
+            <div id="result" style="min-width:70%">
+            </div>
+        </div>
+
+        <script src="script/utils.js"></script>
+        <script src="script/config_loader.js"></script>
+        <script src="script/history.js"></script>
+        <script src="script/analytics.js"></script>
     </body>
 </html>

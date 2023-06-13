@@ -11,7 +11,7 @@ const createSeperator = (string) => {
 }
 
 
-const updateHistory = (seperation="week", update_all=false) => {
+const updateHistory = (seperation="week", update_all=false, hide_buttons=false) => {
     // if this parameter is true, delete everything for a "true" update
     if (update_all) {
         // saving this to add it later
@@ -65,33 +65,39 @@ const updateHistory = (seperation="week", update_all=false) => {
         duration.innerText = convertSecondsToTime(t1 - t0);
 
         // Buttons
-        // Trash
-        buttons[0].addEventListener("click", () => {
-            // Shriking and fading out
-            new_entry.setAttribute("style", "max-height:0;opacity:0");
-            // After animations, delete
-            setTimeout(()=> {
-                // Erasing every memory to this entry
-                div_history.removeChild(new_entry);
-                config.history.pop(i);
+        if (!hide_buttons) {
+            // Trash
+            buttons[0].addEventListener("click", () => {
+                // Shriking and fading out
+                new_entry.setAttribute("style", "max-height:0;opacity:0;min-height:0");
+                // After animations, delete
+                setTimeout(()=> {
+                    // Erasing every memory to this entry
+                    div_history.removeChild(new_entry);
+                    config.history.pop(i);
+                    saveConfig();
+                }, 300)
+            })
+
+            // Copy up
+            buttons[1].addEventListener("click", () => {
+                // Changing the input fields value to this entrys value
+                config.history[i][0] = input_work_type.value;
+                text.innerText = input_work_type.value;
                 saveConfig();
-            }, 300)
-        })
+            })
 
-        // Copy up
-        buttons[1].addEventListener("click", () => {
-            // Changing the input fields value to this entrys value
-            config.history[i][0] = input_work_type.value;
-            text.innerText = input_work_type.value;
-            saveConfig();
-        })
-
-        // Copy down
-        buttons[2].addEventListener("click", () => {
-            // Changing the input fields value to this entrys value
-            input_work_type.value = config.history[i][0];
-        })
-
+            // Copy down
+            buttons[2].addEventListener("click", () => {
+                // Changing the input fields value to this entrys value
+                input_work_type.value = config.history[i][0];
+            })
+        }
+        else {
+            for (const button of buttons) {
+                button.parentElement.removeChild(button)
+            }
+        }
         
         // Adding the new entry to the current displayed entries
         all_entries[0].before(new_entry);

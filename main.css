@@ -1,5 +1,6 @@
 :root {
     font-size: 16px;
+    font-family: Arial, Helvetica, sans-serif;
     scrollbar-width: none;
 
     /*colors*/
@@ -71,10 +72,12 @@ h1 {
 @keyframes appear {
     from {
         max-height: 0;
+        min-height: 0;
         opacity: 0;
     }
     to {
         max-height: 10rem;
+        min-height: 4.5rem;
         opacity: 100%;
     }
 }
@@ -122,8 +125,6 @@ input#timer-button.active:hover {background-color: var(--color-active-hover);}
     border-radius: 0.2rem;
     */
 
-    max-height: 10rem;
-
     overflow-y: auto;
     scrollbar-width: none;
     overflow-x: hidden;
@@ -143,6 +144,7 @@ input#timer-button.active:hover {background-color: var(--color-active-hover);}
         margin: 0 0 0.2rem 0.4rem;
 
         max-height: 10rem; /* Important for shrinking animation on deletion */
+        min-height: 4.5rem;
 
         display: flex;
         flex-direction: row;
@@ -227,4 +229,11 @@ input#timer-button.active:hover {background-color: var(--color-active-hover);}
 
     top: 50%;
     transform: translateX(0.2rem)
+}
+
+
+/* analytics.html */
+
+#list.analytics {
+    max-height: auto !important
 }
