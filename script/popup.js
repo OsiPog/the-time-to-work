@@ -57,7 +57,7 @@ const visualTimer = () => {
 const executeDebugCommand = () => {
     switch(input_work_type.value) {
         case "DEBUG:HARD_RESET":
-            browser.storage.local.set({"config":null});
+            browser.storage.local.remove("config");
             window.location.reload(true);
             return true;
         case "DEBUG:EDIT":
