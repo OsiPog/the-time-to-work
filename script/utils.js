@@ -66,6 +66,11 @@ const weekOfTheYear = (date) => {
     return Math.floor((date - new Date(date.getFullYear(), 0, 0)) / 1000 / 60 / 60 / 24 / 7)
 }
 
+// Returns the timestamp for the start of the week
+const startOfWeek = (date) => {
+    return new Date(date - date.getDay()*24*3600*1000)
+}
+
 // Checks if a seperator is needed 
 // (e. g. if t1 is a week after t0 it returns a seperator string on seperation_type="week")
 // t1, t0 are unix timestamps
