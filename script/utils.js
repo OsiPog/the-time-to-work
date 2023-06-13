@@ -38,9 +38,9 @@ const forceDigitAmount = (num, digits) => {
 
 // Returns an amount of seconds into a time
 const convertSecondsToTime = (seconds, format="hh:mm:ss") => {
-    let h = Math.floor(seconds/3600);
-    let min = Math.floor((seconds-h*3600)/60);
-    let s = seconds-h*3600-min*60;
+    let h = Math.floor(Math.abs(seconds)/3600);
+    let min = Math.abs(Math.floor((Math.abs(seconds)-h*3600)/60));
+    let s = Math.abs(seconds)-h*3600-min*60;
 
     let result = format
 
@@ -57,7 +57,7 @@ const convertSecondsToTime = (seconds, format="hh:mm:ss") => {
     replaceTimeFormatWithDigitAmount(s, "s")
 
 
-    return result;
+    return (seconds < 0 ? "-":"") + result;
 }
 
 // Returns the week number of the year of a certain date
