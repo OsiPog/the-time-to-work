@@ -10,7 +10,6 @@ const getConfig = async() => {
     let decrypted = vigenere(encrypted, "time-to-work", true);
 
     if (!decrypted || !encrypted || encrypted === "" || decrypted === "") decrypted = "{}"
-    
     const config = JSON.parse(decrypted)
 
     config.started_at = config.started_at || -1
@@ -22,9 +21,9 @@ const getConfig = async() => {
     }
     config.templates = config.templates || {
         default: {
-            format: "{work_types}\n<b>Gesamt: {duration_sum}h</b> ({overtime}h Gutstunden/Minusstunden diese Woche)\nÜberstunden Gesamt: {overtime_sum}h",
-            work_types_format: "{work_type} - {duration}h\n",
-            duration_format: "hh:mm"
+            text: "{work_types}<b>Gesamt: {duration_sum}h</b> ({overtime}h Gutstunden/Minusstunden diese Woche)\nÜberstunden Gesamt: {overtime_sum}h",
+            work_types: "{work_type} - {duration}h<br/>",
+            time: "hh:mm"
         }
     }
 
