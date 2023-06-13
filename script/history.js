@@ -53,7 +53,8 @@ const updateHistory = (seperation="week", update_all=false, hide_buttons=false) 
         // Getting the HTML elements.
         const new_entry = sample_entry.cloneNode(true);
         const text = new_entry.querySelector("div.text");
-        const duration = new_entry.querySelector("div.duration");
+        const duration = new_entry.querySelector("div.duration>.length");
+        const date = new_entry.querySelector("div.duration>.date");
         const buttons = new_entry.querySelectorAll("div.control>img");
 
         // Changing the default values.
@@ -63,6 +64,9 @@ const updateHistory = (seperation="week", update_all=false, hide_buttons=false) 
         // The text will be the work type.
         text.innerText = work_type;
         duration.innerText = convertSecondsToTime(t1 - t0);
+
+        const t0_date = new Date(t0*1000)
+        date.innerText = `${t0_date.getDate()}.${t0_date.getMonth()+1}.${t0_date.getFullYear()}`
 
         // Buttons
         if (!hide_buttons) {
