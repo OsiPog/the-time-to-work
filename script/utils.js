@@ -27,19 +27,37 @@ const vigenere = (string, key_string, decrypt = false) => {
     
     return new_string;
 }
+const forceDigitAmount = (num, digits) => {
+    let result = num + ""
+    for(let i=0;i<digits;i++) {
+        if (i === 0 && num === 0) continue
+        if (num < Math.pow(10, i)) result = "0" + result
+    }
+    return result
+}
 
-
-// Returns an amount of seconds into the time format hh:mm:ss
-const convertSecondsToTime = (seconds) => {
+// Returns an amount of seconds into a time
+const convertSecondsToTime = (seconds, format="hh:mm:ss") => {
     let h = Math.floor(seconds/3600);
     let min = Math.floor((seconds-h*3600)/60);
     let s = seconds-h*3600-min*60;
 
-    if (h < 10) h = "0" + h;
-    if (min < 10) min = "0" + min;
-    if (s < 10) s = "0" + s;
+    let result = format
 
-    return h + ":" + min + ":" + s;
+    const replaceTimeFormatWithDigitAmount = (num, type) => {
+        let matches = result.match(new RegExp(`${type}*`, "g"))
+        for (const match of matches) {
+            if (match.length < 1) continue
+            result = result.replace(match, forceDigitAmount(num, match.length))
+        }
+    }
+
+    replaceTimeFormatWithDigitAmount(h, "h")
+    replaceTimeFormatWithDigitAmount(min, "m")
+    replaceTimeFormatWithDigitAmount(s, "s")
+
+
+    return result;
 }
 
 // Returns the week number of the year of a certain date
