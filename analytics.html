@@ -6,25 +6,40 @@
         <meta charset="utf-8">
     </head>
     <body>
-        <div class="flex-con-h">
-            <div id="list" style="width:50%">
-                <div hidden id="sample-history-seperator" class="seperator">2022 Week 42</div>
-                <div hidden id="sample-history-entry" class="entry">
-                    <div class="text">
-                        A well thought out work type
-                    </div>
-                    <div class="duration">
-                        <div class="length">01:02:03</div>
-                        <div class="date">13.06.2023</div>
-                    </div>
-                    <div class="control">
-                        <img src="img/trash.png" title="Delete entry" class="button">
-                        <img src="img/copy_up.png" title="Copy text box content here" class="button">
-                        <img src="img/copy_down.png" title="Copy type of work into text box" class="button">
+        <div class="flex-con-h" id="analytics">
+            <div id="records">
+                <div class="card">
+                    <h2>Recordings</h2>
+                    <div class="content">
+                        <div id="list">
+                            <div hidden id="sample-history-seperator" class="seperator">2022 Week 42</div>
+                            <div hidden id="sample-history-entry" class="entry">
+                                <div class="text">
+                                    A well thought out work type
+                                </div>
+                                <div class="duration">
+                                    <div class="length">01:02:03</div>
+                                    <div class="date">13.06.2023</div>
+                                </div>
+                                <div class="control">
+                                    <img src="img/trash.png" title="Delete entry" class="button">
+                                    <img src="img/copy_up.png" title="Copy text box content here" class="button">
+                                    <img src="img/copy_down.png" title="Copy type of work into text box" class="button">
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div id="summary" style="min-width:50%">
+            <div id="summary">
+                <div id="settings" class="card">
+                    <h2>Settings</h2>
+                    <div class="content"></div>
+                </div>
+                <div id="output" class="card">
+                    <h2>Summary</h2>
+                    <div class="content"></div>
+                </div>
             </div>
         </div>
 
