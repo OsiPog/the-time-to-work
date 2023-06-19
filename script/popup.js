@@ -61,8 +61,8 @@ const executeDebugCommand = () => {
             window.location.reload(true);
             return true;
         case "DEBUG:EDIT":
-            let timestamp = Number(prompt("Enter the new timestamp (seconds):"));
-            config.history[0][1] = timestamp;
+            let duration = Number(prompt("Enter the new duration (seconds):"));
+            config.history[0][2] = config.history[0][1] + duration;
             saveConfig();
             window.location.reload(true);
             return true;
