@@ -140,29 +140,38 @@ const htmlElement = ( tag, {
     return element
 }
 
-const addSetting = (
-    label = null,
-    options = null, // Array of Objects {label, identifier, pre_selected}
-    handler = null // Will be executed on change: handler(option.identifier)
-) => {
+const addSetting = ({
+    label,
+    type,
+    options, // Array of Objects {label, identifier, pre_selected}
+    handler // Will be executed on change: handler(option.identifier)
+}) => {
     const div_entries = document.querySelector("#settings>.content");
     
     // Label
-    htmlElement("p", {text: label, parent: div_entries})
+    htmlElement("div", {text: label, parent: div_entries})
 
-    const select = htmlElement("select", {parent: div_entries})
+    let user_input
+
+    switch (type) {
+        case "select":
+            user_input = htmlElement("select", {parent: div_entries})
     
-    for(const option of options) {
-        const elem = htmlElement("option", {
-            attributes: {"value": option.identifier},
-            text: option.label,
-            parent: select
-        })
-        if (option.pre_selected) {
-            elem.setAttribute("selected", "")
-        }
+            for(const option of options) {
+                const elem = htmlElement("option", {
+                    attributes: {"value": option.identifier},
+                    text: option.label,
+                    parent: user_input
+                })
+                if (option.pre_selected) {
+                    elem.setAttribute("selected", "")
+                }
+            }
+        
+        case "input":
+            user_input = htmlElement("input", {parent: div_entries})
     }
 
     // fire the handler once a different option was selected
-    select.addEventListener("change", () => {handler(select.value)})
+    user_input.addEventListener("change", () => {handler(user_input.value)})
 }
