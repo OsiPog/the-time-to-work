@@ -144,7 +144,8 @@ const addSetting = ({
     label,
     type,
     options, // Array of Objects {label, identifier, pre_selected}
-    handler // Will be executed on change: handler(option.identifier)
+    handler, // Will be executed on change: handler(option.identifier)
+    additional_attributes,
 }) => {
     const div_entries = document.querySelector("#settings>.content");
     
@@ -155,7 +156,7 @@ const addSetting = ({
 
     switch (type) {
         case "select":
-            user_input = htmlElement("select", {parent: div_entries})
+            user_input = htmlElement("select", {parent: div_entries, attributes: additional_attributes})
     
             for(const option of options) {
                 const elem = htmlElement("option", {
@@ -167,11 +168,13 @@ const addSetting = ({
                     elem.setAttribute("selected", "")
                 }
             }
+            break
         
         case "input":
-            user_input = htmlElement("input", {parent: div_entries})
+            user_input = htmlElement("input", {parent: div_entries, attributes: additional_attributes})
+            break
     }
 
     // fire the handler once a different option was selected
-    user_input.addEventListener("change", () => {handler(user_input.value)})
+    user_input.addEventListener("change", () => {handler(user_input.value, user_input)})
 }
