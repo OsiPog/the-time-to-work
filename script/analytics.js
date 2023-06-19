@@ -10,26 +10,27 @@ const getSummaryOf = (time_span) => {
     switch (time_span) {
         case "this week":
             ignore_before = startOfWeek(today)
-            next_expiration_date = Math.round(startOfWeek(new Date(3600*24*7*1000 + today*1))/1000) // seconds*hours*days in mili
             break
     }
     ignore_before /= 1000 // convert to seconds
 
+    let newest_entry_time = 0;
     for (const entry of config.history) {
         if (entry[1] < ignore_before) continue
 
         const duration = entry[2] - entry[1]
         summary[entry[0]] = summary[entry[0]]+duration || duration
         duration_sum += duration
-    }
 
-    console.log(new Date(3600*24*7*1000 + today*1))
+        if (entry[1] > newest_entry_time)
+            newest_entry_time = entry[1]
+    }
 
     // Calculate overtime
     overtime = duration_sum - config.overtime.threshold
-    if (config.overtime.sum_expiration_date < today/1000) {
-        config.overtime.sum_expiration_date = next_expiration_date
-        config.overtime.sum += overtime 
+    if (config.overtime.sum_expiration_date < newest_entry_time) {
+        config.overtime.sum_expiration_date = newest_entry_time
+        config.overtime.sum += overtime
     }
 
     // Make output string
