@@ -165,4 +165,4 @@ const addSetting = (
 
     // fire the handler once a different option was selected
     select.addEventListener("change", () => {handler(select.value)})
-},
+}
