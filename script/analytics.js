@@ -1,20 +1,11 @@
-const getSummaryOf = (time_span) => {
+const getSummaryData = (from, to) => {
     const summary = {}
     let duration_sum = 0
-    let overtime = 0
 
-    const today = new Date()
-    let ignore_before = today;
-
-    switch (time_span) {
-        case "this week":
-            ignore_before = startOfWeek(today)
-            break
-    }
-    ignore_before /= 1000 // convert to seconds
     let newest_entry_time = 0;
     for (const entry of config.history) {
-        if (entry[1] < ignore_before) continue
+        if ((entry[1] < from) && from !== -1) continue
+        if ((entry[1] > to) && to !== -1) continue
 
         const duration = entry[2] - entry[1]
         summary[entry[0]] = summary[entry[0]]+duration || duration
@@ -25,21 +16,46 @@ const getSummaryOf = (time_span) => {
         }
     }
 
-    // Calculate overtime
-    overtime = duration_sum - config.overtime.threshold
-    if (config.overtime.sum_expiration_date < newest_entry_time) {
-        config.overtime.sum_expiration_date = newest_entry_time
-        config.overtime.sum += overtime
+    let overtime = duration_sum - config.overtime.threshold
+
+    return {summary, overtime, duration_sum, newest_entry_time}
+}
+
+const getSummaryOf = (time_span) => {
+    const today = new Date()
+    let ignore_before = today;
+    let ignore_after = (config.history[0][1]+1)*1000
+
+    let overtime_offset = 0
+
+    switch (time_span) {
+        case "this week":
+            ignore_before = startOfWeek(today)
+            break
+        case "last week":
+            overtime_offset = getSummaryData(startOfWeek(today), startOfWeek(today + 86400*7*1000)).overtime
+            ignore_before = startOfWeek(new Date(today - 86400*7*1000))
+            ignore_after = startOfWeek(today)
+            break
+    }
+    ignore_before /= 1000 // convert to seconds
+    ignore_after /= 1000
+
+    const data = getSummaryData(ignore_before, ignore_after)
+    
+    if (config.overtime.sum_expiration_date < data.newest_entry_time) {
+        config.overtime.sum_expiration_date = data.newest_entry_time
+        config.overtime.sum += data.overtime
     }
 
     // Make output string
     // work types
     let work_types = ""
-    for (const work_type_name in summary) {
+    for (const work_type_name in data.summary) {
         let work_type = template.work_types
         .replace(/\{work\_type\}/g, work_type_name)
         .replace(/\{duration\}/g, 
-            convertSecondsToTime(summary[work_type_name], template.time))
+            convertSecondsToTime(data.summary[work_type_name], template.time))
 
         work_types += work_type
     }
@@ -47,13 +63,13 @@ const getSummaryOf = (time_span) => {
     // Whole summary
     return template.text
     .replace(/\{work\_types\}/g, work_types) 
-    .replace(/\{duration\_sum\}/g, convertSecondsToTime(duration_sum, template.time))
-    .replace(/\{overtime\}/g, convertSecondsToTime(overtime, template.time))
-    .replace(/\{overtime\_sum\}/g, convertSecondsToTime(config.overtime.sum, template.time))
+    .replace(/\{duration\_sum\}/g, convertSecondsToTime(data.duration_sum, template.time))
+    .replace(/\{overtime\}/g, convertSecondsToTime(data.overtime, template.time))
+    .replace(/\{overtime\_sum\}/g, convertSecondsToTime(config.overtime.sum-overtime_offset, template.time))
 }
 
 const updateSummary = () => {
-    div_output_content.innerHTML = getSummaryOf(template.summary_of)
+    div_output_content.innerHTML = getSummaryOf(config.summary_of)
     saveConfig()
 }
 
@@ -102,6 +118,28 @@ const init = async() => {
         options,
         handler: (val) => {
             config.selected_template = val
+            saveConfig()
+            window.location.reload()
+        }
+    })
+
+    addSetting({
+        label: "Summary of",
+        type: "select",
+        options: [
+            {
+                identifier: "this week",
+                label: "this week",
+                pre_selected: config.summary_of === "this week"
+            },
+            {
+                identifier: "last week",
+                label: "last week",
+                pre_selected: config.summary_of === "last week"
+            },
+        ],
+        handler: (val) => {
+            config.summary_of = val
             saveConfig()
             window.location.reload()
         }
