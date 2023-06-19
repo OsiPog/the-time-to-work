@@ -23,12 +23,14 @@ const getConfig = async() => {
         "Week_de": {
             text: "{work_types}<b>Gesamt: {duration_sum}h</b> ({overtime}h Gutstunden/Minusstunden diese Woche)<br/>Überstunden Gesamt: {overtime_sum}h",
             work_types: "{work_type} - {duration}h<br/>",
-            time: "hh:mm"
+            time: "hh:mm",
+            summary_for: "this week"
         },
         "Week_en": {
             text: "{work_types}<b>Total: {duration_sum}h</b> ({overtime}h overtime this week)<br/>Total Overtime: {overtime_sum}h",
             work_types: "{work_type} - {duration}h<br/>",
-            time: "hh:mm"
+            time: "hh:mm",
+            summary_for: "this week"
         }
     }
     config.selected_template = config.selected_template || "Week_en"
