@@ -78,7 +78,7 @@ const updateHistory = (seperation="week", update_all=false, hide_buttons=false) 
                 setTimeout(()=> {
                     // Erasing every memory to this entry
                     div_history.removeChild(new_entry);
-                    config.history.pop(i);
+                    config.history.splice(i, 1);
                     saveConfig();
                 }, 300)
             })
