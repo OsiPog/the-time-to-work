@@ -5,7 +5,6 @@ const getSummaryOf = (time_span) => {
 
     const today = new Date()
     let ignore_before = today;
-    let next_expiration_date;
 
     switch (time_span) {
         case "this week":
@@ -13,7 +12,6 @@ const getSummaryOf = (time_span) => {
             break
     }
     ignore_before /= 1000 // convert to seconds
-
     let newest_entry_time = 0;
     for (const entry of config.history) {
         if (entry[1] < ignore_before) continue
@@ -22,8 +20,9 @@ const getSummaryOf = (time_span) => {
         summary[entry[0]] = summary[entry[0]]+duration || duration
         duration_sum += duration
 
-        if (entry[1] > newest_entry_time)
+        if (entry[1] > newest_entry_time) {
             newest_entry_time = entry[1]
+        }
     }
 
     // Calculate overtime
@@ -55,6 +54,7 @@ const getSummaryOf = (time_span) => {
 
 const updateSummary = () => {
     div_output_content.innerHTML = getSummaryOf(template.summary_of)
+    saveConfig()
 }
 
 const init = async() => {
