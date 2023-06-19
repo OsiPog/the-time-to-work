@@ -92,3 +92,77 @@ const getSeperator = (t0, t1, seperation_type, force=false) => {
 
     return null
 }
+
+// Shortcut for creating an element with a class a parent and inner text
+const htmlElement = ( tag, {
+    class_name = null,
+    parent = null,
+    text = null,
+    attributes = null,
+    children = null,
+    event_listeners = null,
+    }) => {
+    
+    // Creating the base element
+    const element = document.createElement(tag);
+
+    // class, parent and innerText
+    if (class_name)
+        element.className = class_name;
+    if (parent) 
+        parent.appendChild(element);
+    if (text)
+       element.innerText = text;
+    
+    // attributes should be dict of attributes e.g {"id": "4", "src": "path/to"}
+    if (attributes)
+        for(const attribute in attributes) {
+            // On a value like false or undefined don't set the attribute
+            if (attributes[attribute])
+                element.setAttribute(attribute, attributes[attribute]);
+        }
+    
+    // children should be an array of elements
+    if (children) {
+        for (const child of children) {
+            element.appendChild(child);
+        }
+    }
+
+    // event_listeners should be a dict e.g ("click": (el) => {})
+    if (event_listeners) {
+        for (const event in event_listeners) {
+            element.addEventListener(event, () => {event_listeners[event](element)})
+        }
+    }
+
+
+    return element
+}
+
+const addSetting = (
+    label = null,
+    options = null, // Array of Objects {label, identifier, pre_selected}
+    handler = null // Will be executed on change: handler(option.identifier)
+) => {
+    const div_entries = document.querySelector("#settings>.content");
+    
+    // Label
+    htmlElement("p", {text: label, parent: div_entries})
+
+    const select = htmlElement("select", {parent: div_entries})
+    
+    for(const option of options) {
+        const elem = htmlElement("option", {
+            attributes: {"value": option.identifier},
+            text: option.label,
+            parent: select
+        })
+        if (option.pre_selected) {
+            elem.setAttribute("selected", "")
+        }
+    }
+
+    // fire the handler once a different option was selected
+    select.addEventListener("change", () => {handler(select.value)})
+},
