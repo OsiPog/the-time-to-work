@@ -54,7 +54,7 @@ const getSummaryOf = (time_span) => {
 }
 
 const updateSummary = () => {
-    div_output_content.innerHTML = getSummaryOf("this week")
+    div_output_content.innerHTML = getSummaryOf(template.summary_of)
 }
 
 const init = async() => {
