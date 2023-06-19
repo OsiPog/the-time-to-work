@@ -66,9 +66,10 @@ const weekOfTheYear = (date) => {
     return Math.floor((date - new Date(date.getFullYear(), 0, 0)) / 1000 / 60 / 60 / 24 / 7)
 }
 
-// Returns the timestamp for the start of the week
+// Returns the timestamp for the start of the week Mon 00:00 UTC
 const startOfWeek = (date) => {
-    return new Date(date - date.getDay()*24*3600*1000)
+    const day = new Date(Math.floor(date/86400000)*86400000)
+    return new Date(day - (day.getDay()-1)*24*3600*1000)
 }
 
 // Checks if a seperator is needed 
