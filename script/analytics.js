@@ -43,11 +43,6 @@ const getSummaryOf = (time_span) => {
     ignore_after /= 1000
 
     const data = getSummaryData(ignore_before, ignore_after)
-    
-    if (config.overtime.sum_expiration_date < data.newest_entry_time) {
-        config.overtime.sum_expiration_date = data.newest_entry_time
-        config.overtime.sum += data.overtime
-    }
 
     // Make output string
     // work types
@@ -62,15 +57,18 @@ const getSummaryOf = (time_span) => {
     }
 
     // Whole summary
-    return template.text
-    .replace(/\{work\_types\}/g, work_types) 
-    .replace(/\{duration\_sum\}/g, convertSecondsToTime(data.duration_sum, template.time))
-    .replace(/\{overtime\}/g, convertSecondsToTime(data.overtime, template.time))
-    .replace(/\{overtime\_sum\}/g, convertSecondsToTime(config.overtime.sum-overtime_offset, template.time))
+    return {
+        string: template.text
+                .replace(/\{work\_types\}/g, work_types) 
+                .replace(/\{duration\_sum\}/g, convertSecondsToTime(data.duration_sum, template.time))
+                .replace(/\{overtime\}/g, convertSecondsToTime(data.overtime, template.time))
+                .replace(/\{overtime\_sum\}/g, convertSecondsToTime(config.overtime.sum-overtime_offset, template.time)),
+        data,
+    }
 }
 
 const updateSummary = () => {
-    div_output_content.innerHTML = getSummaryOf(config.summary_of)
+    div_output_content.innerHTML = getSummaryOf(config.summary_of).string
     saveConfig()
 }
 
@@ -147,17 +145,11 @@ const init = async() => {
     })
 
     addSetting({
-        label: "Edit overtime",
-        type: "input",
-        additional_attributes: {"placeholder": convertSecondsToTime(config.overtime.sum, "hh:mm")},
-        handler: (val, elem) => {
-            const time = val.split(":")
-            if (!time || !(Number(time[0]) + Number(time[1])) && (Number(time[0]) + Number(time[1]) !== 0)) {
-                elem.value = ""
-                return
-            }
-            const [h, min] = [Number(time[0]), Number(time[1])]
-            config.overtime.sum = h*3600 + min*60
+        label: "Update total overtime",
+        type: "button",
+        additional_attributes: {value: "Update"},
+        handler: () => {
+            config.overtime.sum += getSummaryOf(config.summary_of).data.overtime
             saveConfig()
             window.location.reload()
         }
