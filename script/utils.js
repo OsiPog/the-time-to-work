@@ -174,8 +174,14 @@ const addSetting = ({
         case "input":
             user_input = htmlElement("input", {parent: div_entries, attributes: additional_attributes})
             break
+
+        case "button":
+            user_input = htmlElement("input", {parent: div_entries, attributes: additional_attributes})
+            user_input.setAttribute("type", "button")
+            user_input.addEventListener("click", handler)
+            break
     }
 
     // fire the handler once a different option was selected
-    user_input.addEventListener("change", () => {handler(user_input.value, user_input)})
+    if (type !== "button") user_input.addEventListener("change", () => {handler(user_input.value, user_input)})
 }
