@@ -70,6 +70,28 @@ h1 {
     flex: 1
 }
 
+input,select {
+    flex: 2;
+
+    border-style: solid;
+    border-color: var(--color-seperator);
+    border-radius: 0.1rem;
+
+    align-self: center;
+
+    background-color: white;
+
+    color: var(--color-text)
+}
+input[type=button] {
+    background-color: var(--color-seperator);
+}
+input:focus,select:focus {
+    outline-style: outset;
+    outline-width: 0.2rem;
+    outline-color: var(--color-seperator)
+
+}
 
 
 /* popup.html */
@@ -87,20 +109,8 @@ h1 {
     }
 }
 
-
 #work-type-input {
-    flex: 2;
-
-    margin: var(--margin-input);
-
-    border-style: solid;
-    border-color: var(--color-seperator);
-    border-radius: 0.1rem;
-
-    align-self: center;
-}
-input#work-type-input:focus {
-    outline: none
+    margin: var(--margin-input)
 }
 
 input#open-analytics {
@@ -290,4 +300,9 @@ input#timer-button.active:hover {background-color: var(--color-active-hover);}
     grid-template-columns: 1fr 1fr;
     vertical-align: middle;
     font-size: 1.2rem;
+}
+
+#settings .content>* {
+    margin-bottom: 0.15rem;
+    margin-top: 0.15rem;
 }
