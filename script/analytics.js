@@ -156,6 +156,23 @@ const init = async() => {
             window.location.reload()
         }
     })
+
+    addSetting({
+        label: "Edit total overtime",
+        type: "input",
+        additional_attributes: {"placeholder": convertSecondsToTime(config.overtime.sum, "hh:mm")},
+        handler: (val, elem) => {
+            const time = val.split(":")
+            if (!time || (!(Number(time[0]) + Number(time[1])) && (Number(time[0]) + Number(time[1]) !== 0))) {
+                elem.value = ""
+                return
+            }
+            const [h, min] = [Number(time[0]), Number(time[1])]
+            config.overtime.sum = h*3600 + min*60
+            saveConfig()
+            window.location.reload()
+        }
+    })
 }
 
 // Declare globals
