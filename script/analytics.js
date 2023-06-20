@@ -6,6 +6,7 @@ const getSummaryData = (from, to) => {
     for (const entry of config.history) {
         if ((entry[1] < from) && from !== -1) continue
         if ((entry[1] > to) && to !== -1) continue
+        if (entry[2] === -1) continue
 
         const duration = entry[2] - entry[1]
         summary[entry[0]] = summary[entry[0]]+duration || duration
