@@ -43,6 +43,26 @@ h1 {
     min-width: 50vw;
 }
 
+input,select {
+    flex: 2;
+
+    border-style: solid;
+    border-color: var(--color-seperator);
+    border-radius: 0.1rem;
+
+    align-self: center;
+
+    background-color: white;
+
+    color: var(--color-text)
+}
+input:focus,select:focus {
+    outline-style: outset;
+    outline-width: 0.2rem;
+    outline-color: var(--color-seperator)
+
+}
+
 .submit {
     cursor: pointer;
     border: none;
@@ -68,29 +88,6 @@ h1 {
 }
 .flex-con-h>* {
     flex: 1
-}
-
-input,select {
-    flex: 2;
-
-    border-style: solid;
-    border-color: var(--color-seperator);
-    border-radius: 0.1rem;
-
-    align-self: center;
-
-    background-color: white;
-
-    color: var(--color-text)
-}
-input[type=button] {
-    background-color: var(--color-seperator);
-}
-input:focus,select:focus {
-    outline-style: outset;
-    outline-width: 0.2rem;
-    outline-color: var(--color-seperator)
-
 }
 
 
