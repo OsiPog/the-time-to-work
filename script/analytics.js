@@ -80,7 +80,7 @@ const init = async() => {
     template = config.templates[config.selected_template]
 
     // Create History
-    updateHistory(seperation="week", update_all=true, hide_buttons=true)
+    updateHistory({hide_buttons: true})
 
     // Threshold
     addSetting({
