@@ -11,7 +11,7 @@ const createSeperator = (string) => {
 }
 
 
-const updateHistory = ({seperation="week", update_all=false, hide_buttons=false, load_amount=null}) => {
+const updateHistory = ({seperation="week", update_all=false, hide_buttons=false, load_amount=null}={}) => {
     // if this parameter is true, delete everything for a "true" update
     if (update_all) {
         // saving this to add it later
@@ -35,7 +35,6 @@ const updateHistory = ({seperation="week", update_all=false, hide_buttons=false,
         // Going through all history entries to see which is the last one
         // presented. (to know which ones have to be added)
         for (let i = 0; i < config.history.length; i++) {
-            // console.log(Number(all_entries[0].id), "===", Number(config.history[i][1]));
             if (Number(all_entries[0].id) === Number(config.history[i][1])) {
                 until_index = i;
                 break;
@@ -48,7 +47,7 @@ const updateHistory = ({seperation="week", update_all=false, hide_buttons=false,
         const t0 = config.history[i][1];
         const t1 = config.history[i][2];
 
-        if (t1 === -1) continue;
+        if (t1 === -1) continue; // A started timer creates an entry with the second time being -1
 
         // Getting the HTML elements.
         const new_entry = sample_entry.cloneNode(true);
@@ -78,6 +77,7 @@ const updateHistory = ({seperation="week", update_all=false, hide_buttons=false,
                 setTimeout(()=> {
                     // Erasing every memory to this entry
                     div_history.removeChild(new_entry);
+                    updateSeperators({seperation})
                     config.history.splice(i, 1);
                     saveConfig();
                 }, 300)
@@ -107,6 +107,10 @@ const updateHistory = ({seperation="week", update_all=false, hide_buttons=false,
         all_entries[0].before(new_entry);
     }
 
+    updateSeperators({seperation})
+}
+
+const updateSeperators = ({seperation="week"}={}) => {
     // Seperators do not need to be left untouched so deleting all of them and
     // creating them is the easiest solution.
     const all_seperators = div_history.querySelectorAll("div.seperator");
@@ -118,7 +122,7 @@ const updateHistory = ({seperation="week", update_all=false, hide_buttons=false,
     
     // Looking at each gap between the entries if a seperator is needed
     // Getting all entries again as there are more now.
-    all_entries = div_history.querySelectorAll("div.entry");
+    let all_entries = div_history.querySelectorAll("div.entry");
     for (let i = 0; i<all_entries.length;i++) {
         // You can't check the gap when there isn't another one.
         if ((i === all_entries.length -1)
@@ -129,14 +133,15 @@ const updateHistory = ({seperation="week", update_all=false, hide_buttons=false,
         // seperator anyway, as a kind of "heading".
         let seperator;
         if (i === 0)
-            seperator = getSeperator(0, all_entries[i].id, seperation, true)
+            seperator = getSeperator(all_entries[i].id, 0, seperation, true)
         else
-            seperator = getSeperator(all_entries[i-1].id, all_entries[i].id, seperation)
+            seperator = getSeperator(all_entries[i].id, all_entries[i-1].id, seperation)
 
 
         // If a seperator got created add it.
         if (seperator) {
+            console.log(seperator, i)
             all_entries[i].before(createSeperator(seperator));
         }
     }
-}
+} 

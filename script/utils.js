@@ -67,8 +67,14 @@ const convertSecondsToTime = (duration, format="hh:mm:ss") => {
 
 // Returns the week number of the year of a certain date
 const weekOfTheYear = (date) => {
-    //                                                                sec  -min -h   -day  -week
-    return Math.floor((date - new Date(date.getFullYear(), 0, 0)) / 1000 / 60 / 60 / 24 / 7)
+    const miliseconds_in_day = 1000*60*60*24 
+    return Math.floor(
+        (date.getTime() -
+            (new Date(date.getFullYear(), 0, 0).getTime() + miliseconds_in_day) // needs to be shifted by a day
+        ) 
+        // sec  -min -h   -day  -week
+        / 1000 / 60 / 60 / 24 / 7
+    )
 }
 
 // Returns the timestamp for the start of the week Mon 00:00 UTC
@@ -92,7 +98,7 @@ const getSeperator = (t0, t1, seperation_type, force=false) => {
     switch(seperation_type) {
         case "week":
             if ((week1 > week0) || (year1 > year0) || force) {
-                return year1 + " Week " + week1;
+                return year0 + " Week " + week0;
             }   
     }
 
