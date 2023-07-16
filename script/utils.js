@@ -37,10 +37,15 @@ const forceDigitAmount = (num, digits) => {
 }
 
 // Returns an amount of seconds into a time
-const convertSecondsToTime = (seconds, format="hh:mm:ss") => {
-    let h = Math.floor(Math.abs(seconds)/3600);
-    let min = Math.abs(Math.floor((Math.abs(seconds)-h*3600)/60));
-    let s = Math.abs(seconds)-h*3600-min*60;
+const convertSecondsToTime = (duration, format="hh:mm:ss") => {
+    let h = Math.floor(Math.abs(duration)/3600);
+    let min = Math.abs(Math.floor((Math.abs(duration)-h*3600)/60));
+    let s = Math.abs(duration)-h*3600-min*60;
+
+    // Round up a value if the previous wasn't shown 
+    // e.g. no seconds in format? round minutes if necessary
+    if (!format.includes("s") && s >= 30) min++
+    if (!format.includes("m") && min >= 30) h++
 
     let result = format
 
@@ -56,8 +61,8 @@ const convertSecondsToTime = (seconds, format="hh:mm:ss") => {
     replaceTimeFormatWithDigitAmount(min, "m")
     replaceTimeFormatWithDigitAmount(s, "s")
 
-
-    return (seconds < 0 ? "-":"") + result;
+    // Add a dash to indicate a negative number
+    return (duration < 0 ? "-":"") + result;
 }
 
 // Returns the week number of the year of a certain date
