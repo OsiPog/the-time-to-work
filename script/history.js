@@ -11,7 +11,12 @@ const createSeperator = (string) => {
 }
 
 
-const updateHistory = ({seperation="week", update_all=false, hide_buttons=false, load_amount=null}={}) => {
+const updateHistory = ({
+    seperation="week", 
+    update_all=false, 
+    hide_buttons=false, 
+    load_amount=null
+}={}) => {
     // if this parameter is true, delete everything for a "true" update
     if (update_all) {
         // saving this to add it later
@@ -58,6 +63,9 @@ const updateHistory = ({seperation="week", update_all=false, hide_buttons=false,
 
         // Changing the default values.
         new_entry.removeAttribute("hidden");
+        // Animate the appearance if not fully reloaded
+        if (!update_all && until_index < config.history.length-1 && !load_amount) 
+            new_entry.setAttribute("style", "animation: appear ease-in 0.3s")
         // Setting the ID to the unix timestamp when the work started.
         new_entry.setAttribute("id", t0);
         // The text will be the work type.
@@ -140,7 +148,6 @@ const updateSeperators = ({seperation="week"}={}) => {
 
         // If a seperator got created add it.
         if (seperator) {
-            console.log(seperator, i)
             all_entries[i].before(createSeperator(seperator));
         }
     }

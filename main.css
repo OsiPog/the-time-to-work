@@ -167,10 +167,6 @@ input#timer-button.active:hover {background-color: var(--color-active-hover);}
 
         overflow-y: hidden;
 
-        animation-name: appear;
-        animation-duration: 0.3s;
-        animation-timing-function: ease-in;
-
         transition-property: all;
         transition-duration: 0.3s;
         transition-timing-function: ease-out;
