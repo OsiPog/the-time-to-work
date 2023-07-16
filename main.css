@@ -257,6 +257,11 @@ input#timer-button.active:hover {background-color: var(--color-active-hover);}
 
 /* analytics.html */
 
+#analytics #list {
+    max-height: 80vh;
+    scrollbar-width: initial !important;
+}
+
 #summary {
     display: flex;
     flex-direction: column;
