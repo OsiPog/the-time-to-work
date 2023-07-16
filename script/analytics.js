@@ -27,16 +27,11 @@ const getSummaryOf = (time_span) => {
     let ignore_before = today;
     let ignore_after = (config.history[0][1]+1)*1000
 
-    let overtime_offset = 0
-
-    let displayed_overtime_sum = config.overtime.sum
-
     switch (time_span) {
         case "this week":
             ignore_before = startOfWeek(today)
             break
         case "last week":
-            displayed_overtime_sum -= getSummaryData(startOfWeek(today)/1000, startOfWeek(new Date(today + 86400*7*1000))/1000).overtime
             ignore_before = startOfWeek(new Date(today - 86400*7*1000))
             ignore_after = startOfWeek(today)
             break
@@ -64,7 +59,7 @@ const getSummaryOf = (time_span) => {
                 .replace(/\{work\_types\}/g, work_types) 
                 .replace(/\{duration\_sum\}/g, convertSecondsToTime(data.duration_sum, template.time))
                 .replace(/\{overtime\}/g, convertSecondsToTime(data.overtime, template.time))
-                .replace(/\{overtime\_sum\}/g, convertSecondsToTime(displayed_overtime_sum, template.time)),
+                .replace(/\{overtime\_sum\}/g, convertSecondsToTime(config.overtime.sum, template.time)),
         data,
     }
 }
