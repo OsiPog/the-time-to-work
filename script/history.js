@@ -11,7 +11,7 @@ const createSeperator = (string) => {
 }
 
 
-const updateHistory = (seperation="week", update_all=false, hide_buttons=false) => {
+const updateHistory = ({seperation="week", update_all=false, hide_buttons=false, load_amount=null}) => {
     // if this parameter is true, delete everything for a "true" update
     if (update_all) {
         // saving this to add it later
@@ -29,7 +29,7 @@ const updateHistory = (seperation="week", update_all=false, hide_buttons=false) 
 
     let until_index; // Marks until which index the list has to be walked through.
     if (all_entries.length === 1) { // if theres nothing except the sample
-        until_index = config.history.length;
+        until_index = load_amount || config.history.length;
     }
     else {
         // Going through all history entries to see which is the last one

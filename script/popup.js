@@ -105,7 +105,7 @@ const init = async() => {
     }
 
     // Creating the visual history.
-    updateHistory();
+    updateHistory({load_amount: 10});
 }
 
 // Declare globals
