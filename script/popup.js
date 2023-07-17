@@ -101,8 +101,15 @@ const init = async() => {
 
     // Starting the timer if the popup was closed with the timer on.
     if (config.started_at !== -1) {
+        if (config.history[0][0] !== "not defined") input_work_type.value = config.history[0][0]
         startTimer();
     }
+
+    // On change of work type input change also the running entry (if timer is on)
+    input_work_type.addEventListener("change", () => {
+        if (!button_timer.classList.contains("active")) return
+        config.history[0][0] = input_work_type.value
+    })
 
     // Creating the visual history.
     updateHistory({load_amount: 10});
